@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/22 16:45:04 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/22 18:54:50 by capapes          ###   ########.fr       */
+/*   Created: 2024/06/22 18:47:45 by capapes           #+#    #+#             */
+/*   Updated: 2024/06/22 18:53:21 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
-#include "utils.h"
+#ifndef UTILS_H
+# define UTILS_H
 
-int main(int argc, char **argv)
-{
-    if(!ft_are_str_int(argc, argv))
-        return (0);
-    return (1);
-}
+# include <stddef.h>
+
+# define STR_INT_MAX "2147483647"
+# define STR_INT_MIN "2147483648"
+
+int	ft_isempty(char *s);
+int	ft_issign(int c);
+int ft_isdigit(int c);
+int ft_strlen(char *s);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
+int	ft_are_str_int(int argc, char *argv[]);
+int	ft_isdigit(int c);
+
+#endif

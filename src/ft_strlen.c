@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/22 16:45:04 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/22 18:54:50 by capapes          ###   ########.fr       */
+/*   Created: 2024/01/12 19:11:07 by capapes           #+#    #+#             */
+/*   Updated: 2024/06/22 18:43:09 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
-#include "utils.h"
+#include <unistd.h> // for t_size
 
-int main(int argc, char **argv)
+size_t	ft_strlen(const char *s)
 {
-    if(!ft_are_str_int(argc, argv))
-        return (0);
-    return (1);
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }

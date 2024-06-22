@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_issign.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/22 16:45:04 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/22 18:54:50 by capapes          ###   ########.fr       */
+/*   Created: 2024/05/07 19:12:43 by capapes           #+#    #+#             */
+/*   Updated: 2024/06/22 18:07:09 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
-#include "utils.h"
-
-int main(int argc, char **argv)
+int	ft_issign(int c)
 {
-    if(!ft_are_str_int(argc, argv))
-        return (0);
-    return (1);
+	return (c == '+' || c == '-');
 }
