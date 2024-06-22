@@ -1,0 +1,14 @@
+# Prerequisites
+*.d
+
+# Object files
+*.o
+
+# MAC
+*.DS_Store
+
+# Windows
+Thumbs.db
+
+# Linux
+*.swp
