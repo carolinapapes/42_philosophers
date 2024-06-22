@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ph_philosophers__create.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/22 16:45:04 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/22 19:23:21 by capapes          ###   ########.fr       */
+/*   Created: 2024/06/22 19:07:09 by capapes           #+#    #+#             */
+/*   Updated: 2024/06/22 19:08:17 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
-#include "ph_philosophers.h"
+#include "ph_philosophers.h";
 
-int main(int argc, char **argv)
+void   ph_philo__create(int argc, char **argv)
 {
-    if(!ft_are_str_int(argc, argv))
-        return (0);
-    philos_create(argc, argv);
-    
-    return (1);
+
 }
