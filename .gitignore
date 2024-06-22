@@ -12,3 +12,6 @@ Thumbs.db
 
 # Linux
 *.swp
+
+# .VSCode
+.vscode
