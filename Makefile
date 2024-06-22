@@ -1,7 +1,13 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -I./include
 SRC_DIR = ./src
-SRC = main.c
+SRC = main.c \
+ft_isdigit.c \
+ft_isempty.c \
+ft_issign.c \
+ft_strlen.c \
+ft_strncmp.c \
+parser.c
 
 BUILD_DIR = ./build
 
@@ -9,7 +15,7 @@ OBJ_SRC = $(SRC:%.c=$(BUILD_DIR)/%.o)
 DPS = $(OBJ_SRC:%.o=%.d)
 
 PREQ = Makefile
-NAME = pipex
+NAME = philosophers
 DEFLAGS := -MMD -MP
 
 # Colors
