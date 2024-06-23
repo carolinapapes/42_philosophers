@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 17:55:56 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/22 18:52:58 by capapes          ###   ########.fr       */
+/*   Updated: 2024/06/22 21:03:55 by carolinapap      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_is_str_int(char *s)
 	if (!ft_isnbr(s))
 		return (0);
 	sign = *s;
-	s = ft_get_non_zero_digit(s);   
+	s = ft_get_non_zero_digit(s);
 	len = ft_strlen(s);
 	if (len != 10)
 		return (len < 10);

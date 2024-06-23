@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:45:04 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/22 18:54:50 by capapes          ###   ########.fr       */
+/*   Updated: 2024/06/22 21:02:44 by carolinapap      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include "utils.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    if(!ft_are_str_int(argc, argv))
-        return (0);
-    return (1);
+	if (!ft_are_str_int(argc, argv))
+		return (0);
+	return (1);
 }

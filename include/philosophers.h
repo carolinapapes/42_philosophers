@@ -3,16 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:51:17 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/22 18:53:01 by capapes          ###   ########.fr       */
+/*   Updated: 2024/06/22 21:54:51 by carolinapap      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef PHILOSOPHERS_H
+#ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
+
+# include <threads.h>
 
 int	ft_are_str_int(int argc, char *argv[]);
 
-# endif
+typedef struct s_philosopher
+{
+	th	id;
+
+}	t_philosopher;
+
+#endif
