@@ -1,16 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   test_times.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/22 16:45:04 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/24 15:32:17 by capapes          ###   ########.fr       */
+/*   Created: 2024/06/22 19:07:09 by capapes           #+#    #+#             */
+/*   Updated: 2024/06/24 12:24:46 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
 #include "ph_philosophers.h"
 #include <sys/time.h>
 #include <stdio.h>
@@ -27,7 +26,7 @@ unsigned int ms_to_us(unsigned int ms)
     return(ms * 1000);
 }
 
-unsigned int get_random(unsigned int max)
+unsigned int get_random_ms(unsigned int max)
 {
     return(rand() % max + 1);
 }
@@ -49,39 +48,26 @@ void is_philo_dead(struct timeval init, struct timeval curr, unsigned int time_t
 }
 
 
-void program__init(t_program *program)
-{
-    program->n_philosophers = get_random(100);
-    program->time_to_die = get_random(1000);
-    program->time_to_eat = get_random(1000);
-    program->time_to_sleep = get_random(1000);
-}
-
-void   program__print(t_program *program)
-{
-    printf("n_philosophers: %u\n", program->n_philosophers);
-    printf("time_to_die: %u\n", program->time_to_die);
-    printf("time_to_eat: %u\n", program->time_to_eat);
-    printf("time_to_sleep: %u\n", program->time_to_sleep);
-}
-
 int	main(void)
 {
-    t_program   program;
+    struct timeval tv_1;
+    struct timeval tv_2;
+    unsigned int time_to_die;
+    unsigned int time_to_eat;
 
+    srand(time(NULL));
+    time_to_die = get_random_ms(1000);
+    time_to_eat = get_random_ms(1000);
 
-    srand(time(NULL)); //
-    struct timeval tv_2; //
-
-    program__init(&program); //
-    program__print(&program); //
-
-    gettimeofday(&program.start_time, NULL);
-
+    printf("im: %s\n", __func__);
+    printf("time to die: %u\n", time_to_die);
+    printf("time to eat: %u\n", time_to_eat);
+    
+    gettimeofday(&tv_1, NULL);
+    usleep(ms_to_us(time_to_eat));
+    gettimeofday(&tv_2, NULL);
+    printf("time1: %u\n", get_time_ms(tv_1));
+    printf("time2: %u\n", get_time_ms(tv_2));
+    is_philo_dead(tv_1, tv_2, time_to_die);
     return(0);
 }
-
-// usleep(ms_to_us(program.time_to_eat)); // move
-// gettimeofday(&tv_2, NULL); //
-
-// is_philo_dead(program.start_time, tv_2, program.time_to_die); // move

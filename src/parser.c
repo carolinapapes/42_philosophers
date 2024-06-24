@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
+/*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 17:55:56 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/22 21:03:55 by carolinapap      ###   ########.fr       */
+/*   Updated: 2024/06/23 15:47:30 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_is_str_int(char *s)
 	if (len != 10)
 		return (len < 10);
 	if (sign == '-')
-		return (ft_strncmp(STR_INT_MIN, s, len) >= 0);
+		return (0);
 	return (ft_strncmp(STR_INT_MAX, s, len) >= 0);
 }
 
@@ -58,6 +58,8 @@ int	ft_are_str_int(int argc, char *argv[])
 	isvalid = 1;
 	while (isvalid && ++i < argc)
 		isvalid = ft_is_str_int(argv[i]);
+	if (argc < 5 || argc > 6)
+		isvalid = 0;
 	if (!isvalid)
 		return (0);
 	return (1);
