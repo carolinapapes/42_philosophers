@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:45:04 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/24 15:32:17 by capapes          ###   ########.fr       */
+/*   Updated: 2024/06/25 18:54:29 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void is_philo_dead(struct timeval init, struct timeval curr, unsigned int time_t
 {
     unsigned int    time_diff;
     time_diff = get_time_diff(init, curr);
-    printf("Elapsed time: %u\n", time_diff);
     if (time_diff > time_to_die)
         printf("I'm dead\n");
     else
@@ -69,7 +68,6 @@ int	main(void)
 {
     t_program   program;
 
-
     srand(time(NULL)); //
     struct timeval tv_2; //
 
@@ -80,8 +78,3 @@ int	main(void)
 
     return(0);
 }
-
-// usleep(ms_to_us(program.time_to_eat)); // move
-// gettimeofday(&tv_2, NULL); //
-
-// is_philo_dead(program.start_time, tv_2, program.time_to_die); // move

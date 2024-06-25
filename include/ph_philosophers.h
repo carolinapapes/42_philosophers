@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:51:17 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/24 15:26:39 by capapes          ###   ########.fr       */
+/*   Updated: 2024/06/25 18:49:52 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_philosopher
     pthread_mutex_t	*left_fork;
     pthread_mutex_t	*right_fork;
     int				meals;
-    struct timeval	last_meal;
+    unsigned int	last_meal;
 
 }	t_philosopher;
 
@@ -38,9 +38,11 @@ typedef struct s_program
     unsigned int	time_to_eat;
     unsigned int	time_to_sleep;
     unsigned int	n_meals;
+    pthread_mutex_t	write;
     t_philosopher	*t_philo_list;
     pthread_mutex_t	*start;
 	struct timeval	start_time;
+    unsigned int	start_time_u;
 }	t_program;
 
 #endif

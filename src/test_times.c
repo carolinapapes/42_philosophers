@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 19:07:09 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/24 12:24:46 by capapes          ###   ########.fr       */
+/*   Updated: 2024/06/25 18:46:23 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@
 
 unsigned int get_time_ms(struct timeval tv)
 {
-    return(tv.tv_sec * 1000 + tv.tv_usec * 0.001);
+    printf("im: %s\n", __func__);
+    printf("tv_sec: %ld\n", tv.tv_sec);
+    printf("tv_usec: %ld\n", tv.tv_usec);
+    return((tv.tv_sec % 1000) * 1000 + tv.tv_usec * 0.001);
 }
 
 unsigned int ms_to_us(unsigned int ms)

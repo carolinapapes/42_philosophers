@@ -6,33 +6,104 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 19:07:09 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/24 15:31:54 by capapes          ###   ########.fr       */
+/*   Updated: 2024/06/25 18:57:48 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ph_philosophers.h";
 #include <sys/time.h>;
 
-void	ph_philo__routine(t_philosopher *philo, t_program *program)
+
+void ph_get_timeof_day_ms(unsigned int *time_ms)
+{
+	struct timeval	now;
+
+	gettimeofday(&now, NULL);
+	*time_ms = get_time_ms(now);
+}
+
+void	ph_philo__write(t_philosopher *philo, t_program *program, char *str, int isDead)
+{
+	unsigned int	time_now;
+	pthread_mutex_lock(&program->write);
+	ph_get_timeof_day_ms(&time_now);
+	printf("%u %d %s\n", time_now - program->start_time_u, philo->index, str);
+	pthread_mutex_unlock(&program->write);
+}
+
+void	ph_philo__sleep(t_philosopher *philo, t_program *program)
+{
+	ph_philo__write(philo, program, "is sleeping", 0);
+	usleep(ms_to_us(program->time_to_sleep));
+}
+
+ph_philo_am_I_dead(t_philosopher *philo, t_program *program)
+{
+	unsigned int	time_now;
+	unsigned int	time_diff;
+
+	ph_get_timeof_day_ms(&time_now); // needs checks
+	time_diff = time_now - philo->last_meal;
+	if (time_diff > program->time_to_die)
+	{
+		ph_philo__write(philo, program, "is dead", 1);
+		pthread_mutex_lock(&philo->right_fork);
+		pthread_mutex_lock(&philo->left_fork);
+		exit(1);
+	}
+}
+
+void	ph_philo__eat(t_philosopher *philo, t_program *program)
+{
+	philo->last_meal = get_time_ms();
+	ph_philo__write(philo, program, "is eating", 0);
+	usleep(ms_to_us(program->time_to_eat));
+}
+
+void	ph_philo__get_forks(t_philosopher *philo)
+{
+	pthread_mutex_lock(&philo->right_fork);
+	pthread_mutex_lock(&philo->left_fork);
+}
+
+void	ph_philo__drop_forks(t_philosopher *philo)
+{
+	pthread_mutex_unlock(&philo->right_fork);
+	pthread_mutex_unlock(&philo->left_fork);
+}
+
+void	ph_philo__prethink(t_philosopher *philo, t_program *program)
+{
+	if (philo->index % 2 == 0)
+	{
+		ph_philo__think(philo, program);
+		usleep(ms_to_us(program->time_to_eat - 1));
+	}
+}
+
+void	ph_simulation__start(t_program *program)
 {
 	pthread_mutex_lock(program->start);
 	pthread_mutex_unlock(program->start);
-	if (philo->index % 2 == 0)
-	{
-		usleep(ms_to_us(program->time_to_eat));
-		printf("Philosopher %i is sleeping\n", philo->index);
-	}
+}
+
+void	ph_philo__think(t_philosopher *philo, t_program *program)
+{
+	ph_philo__write(philo, program, "is thinking", 0);
+}
+
+void	ph_philo__routine(t_philosopher *philo, t_program *program)
+{
+	ph_simulation__start(program);
+	ph_philo__prethink(philo, program);
 	while (1)
 	{
-		pthread_mutex_lock(&philo->right_fork);
-		pthread_mutex_lock(&philo->left_fork);
-		gettimeofday(&(philo->last_meal), NULL);
-		printf("Philosopher %d is eating\n", philo->index);
-		pthread_mutex_unlock(&philo->right_fork);
-		pthread_mutex_unlock(&philo->left_fork);
-		usleep(ms_to_us(program->time_to_sleep));
-		printf("Philosopher %d is sleeping\n", philo->index);
-		printf("Philosopher %d is thinking\n", philo->index);
+		ph_philo__get_forks(philo);
+		
+		ph_philo__eat(philo, program);
+		ph_philo__drop_forks(philo);
+		ph_philo__sleep(philo, program);
+		ph_philo__think(philo, program);
 	}
 }
 void	ph_philo_assign_left_fork(t_philosopher *philos, int philos_num, int i)
@@ -69,16 +140,16 @@ void	ph_philo_create(t_philosopher *philos, int philos_num)
 		pthread_create(&philos[i].id, NULL, ph_philo__routine, &philos[i]);
 }
 
-
-
-void   ph_philo__create(int philos_num, t_program *program)
+void   ph_sim__init(t_program *program)
 {
 	t_philosopher	*philos;
 
-
-	philos = malloc(sizeof(t_philosopher) * philos_num);
+	philos = malloc(sizeof(t_philosopher) * program->n_philosophers);
 	pthread_mutex_lock(program->start);
-	ph_generate_forks(philos_num, philos);
-	ph_philo_create(philos, philos_num);
+	ph_generate_forks(program->n_philosophers, philos);
+	ph_philo_create(philos, program->n_philosophers);
+	gettimeofday(&program->start_time, NULL);
 	pthread_mutex_unlock(program->start);
+	free(philos);
+	return (0);
 }
