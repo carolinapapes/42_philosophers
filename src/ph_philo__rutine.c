@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ph_philo__sleep.c                                  :+:      :+:    :+:   */
+/*   ph_philo__rutine.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/25 23:23:57 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/06/26 21:18:44 by capapes          ###   ########.fr       */
+/*   Created: 2024/06/26 16:19:00 by capapes           #+#    #+#             */
+/*   Updated: 2024/06/26 16:36:37 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "ph_philosophers.h";
 
-void	ph_philo__sleep(t_philosopher *philo, t_program *program)
+void	ph_philo__routine(t_philosopher *philo, t_program *program)
 {
-	ph_philo__write(philo, program, "is sleeping", 0);
-	usleep(program->time_to_sleep);
+	ph_philo__prethink(philo);
+	while (1)
+	{
+		ph_philo__eat(philo);
+		ph_philo__sleep(philo);
+		ph_philo__think(philo);
+	}
 }

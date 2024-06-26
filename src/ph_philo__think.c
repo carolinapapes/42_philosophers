@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ph_philo__think.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
+/*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 23:27:50 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/06/26 01:36:19 by carolinapap      ###   ########.fr       */
+/*   Updated: 2024/06/26 21:18:42 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ph_philosophers.h";
 #include <sys/time.h>;
 
-void	ph_philo__prethink(t_philosopher *philo, t_program *program)
+void	ph_philo__prethink(t_philosopher *philo)
 {
 	if (philo->index % 2 == 0)
 	{
-		ph_philo__think(philo, program);
-		usleep(ms_to_us(program->time_to_eat - 1));
+		ph_philo__think(philo);
+		usleep(philo->program->time_to_eat - 10);
 	}
 }
 
-inline void	ph_philo__think(t_philosopher *philo, t_program *program)
+inline void	ph_philo__think(t_philosopher *philo)
 {
-	ph_philo__write(philo, program, "is thinking", 0);
+	ph_philo__write(philo, philo->program, "is thinking", 0);
 }

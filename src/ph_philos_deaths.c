@@ -1,19 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ph_philo__sleep.c                                  :+:      :+:    :+:   */
+/*   ph_philos_deaths.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/25 23:23:57 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/06/26 21:18:44 by capapes          ###   ########.fr       */
+/*   Created: 2024/06/26 16:37:56 by capapes           #+#    #+#             */
+/*   Updated: 2024/06/26 20:34:46 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ph_philosophers.h";
+#include <sys/time.h>;
 
-void	ph_philo__sleep(t_philosopher *philo, t_program *program)
+static int check_death(t_philosopher *philo)
 {
-	ph_philo__write(philo, program, "is sleeping", 0);
-	usleep(program->time_to_sleep);
+	if (philo->program->time_to_die < get_time_ms() - philo->last_meal)
+	{
+		philo->program->is_dead = 1;
+		ph_philo__write(philo, philo->program, "died", 1);
+	}
+}
+
+void    ph_philos__deaths(t_philosopher *philos)
+{
+	int i;
+
+	i = -1;
+	while (++i < philos->program->n_philosophers && !philos->program->is_dead)
+	{
+		usleep(2);
+		check_death(&philos[i]);
+	}	
 }
