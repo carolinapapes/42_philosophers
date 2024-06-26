@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isempty.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 19:25:15 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/22 18:07:12 by capapes          ###   ########.fr       */
+/*   Updated: 2024/06/26 01:37:58 by carolinapap      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isempty(char *s)
+inline int	ft_isempty(char *s)
 {
 	return (!*s);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_philosophers__create.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 19:07:09 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/25 18:57:48 by capapes          ###   ########.fr       */
+/*   Updated: 2024/06/26 01:56:00 by carolinapap      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,6 @@ void ph_get_timeof_day_ms(unsigned int *time_ms)
 
 	gettimeofday(&now, NULL);
 	*time_ms = get_time_ms(now);
-}
-
-void	ph_philo__write(t_philosopher *philo, t_program *program, char *str, int isDead)
-{
-	unsigned int	time_now;
-	pthread_mutex_lock(&program->write);
-	ph_get_timeof_day_ms(&time_now);
-	printf("%u %d %s\n", time_now - program->start_time_u, philo->index, str);
-	pthread_mutex_unlock(&program->write);
-}
-
-void	ph_philo__sleep(t_philosopher *philo, t_program *program)
-{
-	ph_philo__write(philo, program, "is sleeping", 0);
-	usleep(ms_to_us(program->time_to_sleep));
 }
 
 ph_philo_am_I_dead(t_philosopher *philo, t_program *program)
@@ -53,55 +38,25 @@ ph_philo_am_I_dead(t_philosopher *philo, t_program *program)
 	}
 }
 
-void	ph_philo__eat(t_philosopher *philo, t_program *program)
-{
-	philo->last_meal = get_time_ms();
-	ph_philo__write(philo, program, "is eating", 0);
-	usleep(ms_to_us(program->time_to_eat));
-}
-
-void	ph_philo__get_forks(t_philosopher *philo)
-{
-	pthread_mutex_lock(&philo->right_fork);
-	pthread_mutex_lock(&philo->left_fork);
-}
-
-void	ph_philo__drop_forks(t_philosopher *philo)
-{
-	pthread_mutex_unlock(&philo->right_fork);
-	pthread_mutex_unlock(&philo->left_fork);
-}
-
-void	ph_philo__prethink(t_philosopher *philo, t_program *program)
-{
-	if (philo->index % 2 == 0)
-	{
-		ph_philo__think(philo, program);
-		usleep(ms_to_us(program->time_to_eat - 1));
-	}
-}
-
 void	ph_simulation__start(t_program *program)
 {
 	pthread_mutex_lock(program->start);
 	pthread_mutex_unlock(program->start);
 }
 
-void	ph_philo__think(t_philosopher *philo, t_program *program)
+void   ph_philo__check_death(t_philosopher *philo, t_program *program)
 {
-	ph_philo__write(philo, program, "is thinking", 0);
+	if (program->is_dead)
+		return ;
+	ph_philo_am_I_dead(philo, program);
 }
 
 void	ph_philo__routine(t_philosopher *philo, t_program *program)
 {
-	ph_simulation__start(program);
 	ph_philo__prethink(philo, program);
 	while (1)
 	{
-		ph_philo__get_forks(philo);
-		
 		ph_philo__eat(philo, program);
-		ph_philo__drop_forks(philo);
 		ph_philo__sleep(philo, program);
 		ph_philo__think(philo, program);
 	}
@@ -131,13 +86,23 @@ void	ph_generate_forks(int philos_num, t_philosopher *philos)
 		ph_create_fork(philos, philos_num, i);
 }
 
-void	ph_philo_create(t_philosopher *philos, int philos_num)
+inline int create(t_philosopher *philos, int i)
+{
+	return (pthread_create(&philos[i].id, NULL, ph_philo__routine, &philos[i]));
+}
+
+void	ph_philo_create(t_philosopher *philos, t_program *program)
 {
 	int				i;
+	int				j;
 
 	i = -1;
-	while (++i < philos_num)
-		pthread_create(&philos[i].id, NULL, ph_philo__routine, &philos[i]);
+	while (++i < program->n_philosophers)
+		if (create(philos) == -1)
+		{
+			program->is_dead = 1;
+		}
+	
 }
 
 void   ph_sim__init(t_program *program)

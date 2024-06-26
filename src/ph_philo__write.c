@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ph_philo__write.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 19:11:07 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/26 01:37:16 by carolinapap      ###   ########.fr       */
+/*   Created: 2024/06/26 00:14:55 by carolinapap       #+#    #+#             */
+/*   Updated: 2024/06/26 01:10:57 by carolinapap      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h> // for t_size
+#include "ph_philosophers.h";
 
-size_t	ft_strlen(const char *s)
+void	ph_philo__write(t_philosopher *philo, t_program *program, char *str, int isDead)
 {
-	size_t	i;
-
-	i = -1;
-	while (s[++i])
-		;
-	return (i);
+	unsigned int	time_now;
+	pthread_mutex_lock(&program->write);
+	ph_get_timeof_day_ms(&time_now);
+	printf("%u %d %s\n", time_now - program->start_time_u, philo->index, str);
+	pthread_mutex_unlock(&program->write);
 }

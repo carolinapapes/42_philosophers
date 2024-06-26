@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_issign.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 19:12:43 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/22 18:07:09 by capapes          ###   ########.fr       */
+/*   Updated: 2024/06/26 01:37:40 by carolinapap      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_issign(int c)
+inline int	ft_issign(int c)
 {
 	return (c == '+' || c == '-');
 }

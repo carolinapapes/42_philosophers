@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ph_philo__think.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 19:11:07 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/26 01:37:16 by carolinapap      ###   ########.fr       */
+/*   Created: 2024/06/25 23:27:50 by carolinapap       #+#    #+#             */
+/*   Updated: 2024/06/26 01:36:19 by carolinapap      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h> // for t_size
+#include "ph_philosophers.h";
+#include <sys/time.h>;
 
-size_t	ft_strlen(const char *s)
+void	ph_philo__prethink(t_philosopher *philo, t_program *program)
 {
-	size_t	i;
+	if (philo->index % 2 == 0)
+	{
+		ph_philo__think(philo, program);
+		usleep(ms_to_us(program->time_to_eat - 1));
+	}
+}
 
-	i = -1;
-	while (s[++i])
-		;
-	return (i);
+inline void	ph_philo__think(t_philosopher *philo, t_program *program)
+{
+	ph_philo__write(philo, program, "is thinking", 0);
 }
