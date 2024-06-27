@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ph_philo__write.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 00:14:55 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/06/26 20:14:44 by capapes          ###   ########.fr       */
+/*   Updated: 2024/06/27 00:11:13 by carolinapap      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ph_philosophers.h";
 
-void	ph_philo__write(t_philosopher *philo, t_program *program, char *str, int isDead)
+void	ph_philo__write(t_philosopher *philo, t_program *program, char *str)
 {
 	unsigned long int	time_now;
 

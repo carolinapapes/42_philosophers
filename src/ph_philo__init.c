@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_philo__init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:52:12 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/26 20:59:28 by capapes          ###   ########.fr       */
+/*   Updated: 2024/06/26 23:39:46 by carolinapap      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	mxcreate(t_philosopher *philos, int i, t_program *program)
 	if (i != 0)	
 		philos[i - 1].left_fork = philos[i].right_fork;
 	else
-        philos[program->n_philosophers - 1].left_fork = philos[0].right_fork;1
+        philos[program->n_philosophers - 1].left_fork = philos[0].right_fork;
 }
 
 static inline int thcreate(t_philosopher *philo)
