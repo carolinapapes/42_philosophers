@@ -3,22 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ph_philos_deaths.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
+/*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:37:56 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/27 19:47:44 by carolinapap      ###   ########.fr       */
+/*   Updated: 2024/06/28 15:05:05 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ph_philosophers.h";
-#include <sys/time.h>;
+#include "ph_philosophers.h"
+#include <sys/time.h>
+#include <stdio.h>
 
-static int check_death(t_philosopher *philo)
+static void check_death(t_philosopher *philo)
 {
-	if (philo->program->time_to_die > get_time_ms() - philo->last_meal)
+	unsigned long int	time_u;
+	
+	ph_get_timeof_day_u(&time_u);
+	if (philo->program->time_to_die > time_u - philo->last_meal)
 		return ;
 	philo->program->is_dead = 1;
-	printf("%u %d %s\n", time_now - program->start_time_u, philo->index, str);
+	printf("%lu %d %s\n", (time_u - philo->program->start_time_u), philo->index, "died");
 }
 
 void    ph_philos__deaths(t_philosopher *philos)

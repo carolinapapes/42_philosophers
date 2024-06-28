@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:51:17 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/26 16:53:25 by capapes          ###   ########.fr       */
+/*   Updated: 2024/06/28 16:13:40 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,58 @@
 
 # include <pthread.h>
 # include <sys/time.h>
+# include <unistd.h>
+# include "ph_utils.h"
+#include <stdio.h>
 
-int	ft_are_str_int(int argc, char *argv[]);
+# include <stddef.h>
 
-typedef struct s_philosopher
-{
-	pthread_t		*id;
-	int				index;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*right_fork;
-	int				meals;
-	unsigned long int	last_meal;
-	t_program		*program;
+# define STR_INT_MAX "2147483647"
+# define STR_INT_MIN "2147483648"
 
-}	t_philosopher;
+int	ft_isempty(char *s);
+int	ft_issign(int c);
+int	ft_isdigit(int c);
+int	ft_strlen(char *s);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
+int	ft_isdigit(int c);
 
 typedef struct s_program
 {
-	unsigned long int	n_philosophers;
-	unsigned long int	n_meals;
+	int	n_philosophers;
+	int	n_meals;
 	unsigned long int	time_to_die;
 	unsigned long int	time_to_eat;
 	unsigned long int	time_to_sleep;
-	pthread_mutex_t	write;
-	pthread_mutex_t	start;
-	struct timeval	start_time;
-	int				is_dead;
+	pthread_mutex_t		write;
+	pthread_mutex_t		start;
+	struct timeval		start_time;
+	int					is_dead;
 	unsigned long int	start_time_u;
 }	t_program;
 
+typedef struct s_philosopher
+{
+	pthread_t			*id;
+	int					index;
+	pthread_mutex_t		*left_fork;
+	pthread_mutex_t		right_fork;
+	int					meals;
+	unsigned long int	last_meal;
+	t_program			*program;
+
+}	t_philosopher;
+
+void		ph_philo__eat(t_philosopher *philo);
+void		ph_philo__init(t_philosopher *philos, t_program *program);
+void		ph_philo__routine(t_philosopher *philo);
+void		ph_philo__sleep(t_philosopher *philo);
+void		ph_philo__think(t_philosopher *philo);
+void		ph_philo__write(t_philosopher *philo, char *str);
+void		ph_philo__prethink(t_philosopher *philo);
+void   		ph_sim(t_program *program);
+void		ph_get_timeof_day_u(unsigned long int *time_u);
+inline unsigned long int	time_diff_u(unsigned long int t1, \
+		unsigned long int t2);
+inline unsigned long int	get_time_u(struct timeval tv);
 #endif

@@ -7,7 +7,15 @@ ft_isempty.c \
 ft_issign.c \
 ft_strlen.c \
 ft_strncmp.c \
-parser.c
+ph_philo__eat.c \
+ph_philo__init.c \
+ph_philo__routine.c \
+ph_philo__sleep.c \
+ph_philo__think.c \
+ph_philo__write.c \
+ph_philos_deaths.c \
+ph_sim.c \
+ph_time.c 
 
 BUILD_DIR = ./build
 

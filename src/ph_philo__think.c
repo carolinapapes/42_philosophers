@@ -6,12 +6,12 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 23:27:50 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/06/26 21:18:42 by capapes          ###   ########.fr       */
+/*   Updated: 2024/06/27 20:22:00 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ph_philosophers.h";
-#include <sys/time.h>;
+#include "ph_philosophers.h"
+#include <sys/time.h>
 
 void	ph_philo__prethink(t_philosopher *philo)
 {
@@ -24,5 +24,5 @@ void	ph_philo__prethink(t_philosopher *philo)
 
 inline void	ph_philo__think(t_philosopher *philo)
 {
-	ph_philo__write(philo, philo->program, "is thinking", 0);
+	ph_philo__write(philo, "is thinking");
 }

@@ -3,38 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
+/*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:45:04 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/26 23:48:45 by carolinapap      ###   ########.fr       */
+/*   Updated: 2024/06/28 17:07:07 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
 #include "ph_philosophers.h"
 #include <sys/time.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h> 
 
-static inline unsigned long int	random(unsigned long int max)
+inline unsigned long int	get_random(unsigned long int max)
 {
-	return (rand() % max + 1);
+	return ((unsigned long int)rand() % max + 1);
 }
 
 static void	init(t_program *program)
 {
-	program->n_philosophers = random(100);
-	program->time_to_die = random(1000);
-	program->time_to_eat = random(1000);
-	program->time_to_sleep = random(1000);
+	program->n_philosophers = get_random(10);
+	program->time_to_die = get_random(140) + 60;
+	program->time_to_eat = get_random(140) + 60;
+	program->time_to_sleep = get_random(140) + 60;
 }
 
 static void	print(t_program *program)
 {
-	printf("n_philosophers: %u\n", program->n_philosophers);
-	printf("time_to_die: %u\n", program->time_to_die);
-	printf("time_to_eat: %u\n", program->time_to_eat);
-	printf("time_to_sleep: %u\n", program->time_to_sleep);
+	printf("n_philosophers: %d\n", program->n_philosophers);
+	printf("time_to_die: %lu\n", program->time_to_die);
+	printf("time_to_eat: %lu\n", program->time_to_eat);
+	printf("time_to_sleep: %lu\n", program->time_to_sleep);
 }
 
 int	main(void)
@@ -42,8 +42,8 @@ int	main(void)
 	t_program		program;
 
 	srand(time(NULL));
-	program__init(&program);
-	program__print(&program);
+	init(&program);
+	print(&program);
 	ph_sim(&program);
 	return (0);
 }

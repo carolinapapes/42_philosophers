@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_time.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
+/*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 20:17:39 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/26 23:45:45 by carolinapap      ###   ########.fr       */
+/*   Updated: 2024/06/27 19:55:14 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ inline unsigned long int	time_diff_tv(struct timeval t1, struct timeval t2)
 	return (get_time_u(t2) - get_time_u(t1));
 }
 
-void	ph_get_timeof_day_ms(unsigned long int *time_u)
+void	ph_get_timeof_day_u(unsigned long int *time_u)
 {
 	struct timeval	now;
 

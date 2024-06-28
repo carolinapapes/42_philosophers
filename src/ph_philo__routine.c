@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ph_philo__rutine.c                                 :+:      :+:    :+:   */
+/*   ph_philo__routine.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:19:00 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/26 16:36:37 by capapes          ###   ########.fr       */
+/*   Updated: 2024/06/28 17:16:50 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "ph_philosophers.h";
+#include "ph_philosophers.h"
 
-void	ph_philo__routine(t_philosopher *philo, t_program *program)
+void	ph_philo__routine(t_philosopher *philo)
 {
+	// printf("aaaaaaaaaa\n");
 	ph_philo__prethink(philo);
+
 	while (1)
 	{
 		ph_philo__eat(philo);
