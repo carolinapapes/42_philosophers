@@ -1,0 +1,73 @@
+==4109219== Memcheck, a memory error detector
+==4109219== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==4109219== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==4109219== Command: ./philosophers
+==4109219== Parent PID: 4107480
+==4109219== 
+==4109219== valgrind: Unrecognised instruction at address 0x4016d4.
+==4109219==    at 0x4016D4: end (ph_sim.c:22)
+==4109219==    by 0x4016D4: ph_sim (ph_sim.c:48)
+==4109219==    by 0x4012E5: main (main.c:47)
+==4109219== Your program just tried to execute an instruction that Valgrind
+==4109219== did not recognise.  There are two possible reasons for this.
+==4109219== 1. Your program has a bug and erroneously jumped to a non-code
+==4109219==    location.  If you are running Memcheck and you just saw a
+==4109219==    warning about a bad jump, it's probably your program's fault.
+==4109219== 2. The instruction is legitimate but Valgrind doesn't handle it,
+==4109219==    i.e. it's Valgrind's fault.  If you think this is the case or
+==4109219==    you are not sure, please let us know and we'll try to fix it.
+==4109219== Either way, Valgrind will now raise a SIGILL signal which will
+==4109219== probably kill your program.
+==4109219== 
+==4109219== Process terminating with default action of signal 4 (SIGILL)
+==4109219==  Illegal opcode at address 0x4016D4
+==4109219==    at 0x4016D4: end (ph_sim.c:22)
+==4109219==    by 0x4016D4: ph_sim (ph_sim.c:48)
+==4109219==    by 0x4012E5: main (main.c:47)
+==4109219== 
+==4109219== HEAP SUMMARY:
+==4109219==     in use at exit: 4,264 bytes in 11 blocks
+==4109219==   total heap usage: 11 allocs, 0 frees, 4,264 bytes allocated
+==4109219== 
+==4109219== 792 bytes in 1 blocks are still reachable in loss record 1 of 3
+==4109219==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4109219==    by 0x4013E6: ph_philo__init (ph_philo__init.c:46)
+==4109219==    by 0x4016AD: initialize (ph_sim.c:38)
+==4109219==    by 0x4016AD: ph_sim (ph_sim.c:46)
+==4109219==    by 0x4012E5: main (main.c:47)
+==4109219== 
+==4109219== 1,024 bytes in 1 blocks are still reachable in loss record 2 of 3
+==4109219==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4109219==    by 0x48EFBA3: _IO_file_doallocate (filedoalloc.c:101)
+==4109219==    by 0x48FECDF: _IO_doallocbuf (genops.c:347)
+==4109219==    by 0x48FDF5F: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:744)
+==4109219==    by 0x48FC6D4: _IO_new_file_xsputn (fileops.c:1243)
+==4109219==    by 0x48FC6D4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==4109219==    by 0x48E614C: outstring_func (vfprintf-internal.c:239)
+==4109219==    by 0x48E614C: __vfprintf_internal (vfprintf-internal.c:1263)
+==4109219==    by 0x48D179E: printf (printf.c:33)
+==4109219==    by 0x4012AE: print (main.c:34)
+==4109219==    by 0x4012AE: main (main.c:46)
+==4109219== 
+==4109219== 2,448 bytes in 9 blocks are possibly lost in loss record 3 of 3
+==4109219==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4109219==    by 0x40147D9: calloc (rtld-malloc.h:44)
+==4109219==    by 0x40147D9: allocate_dtv (dl-tls.c:375)
+==4109219==    by 0x40147D9: _dl_allocate_tls (dl-tls.c:634)
+==4109219==    by 0x49067B4: allocate_stack (allocatestack.c:430)
+==4109219==    by 0x49067B4: pthread_create@@GLIBC_2.34 (pthread_create.c:647)
+==4109219==    by 0x4014B1: thcreate (ph_philo__init.c:29)
+==4109219==    by 0x4014B1: ph_philo__init (ph_philo__init.c:57)
+==4109219==    by 0x4016AD: initialize (ph_sim.c:38)
+==4109219==    by 0x4016AD: ph_sim (ph_sim.c:46)
+==4109219==    by 0x4012E5: main (main.c:47)
+==4109219== 
+==4109219== LEAK SUMMARY:
+==4109219==    definitely lost: 0 bytes in 0 blocks
+==4109219==    indirectly lost: 0 bytes in 0 blocks
+==4109219==      possibly lost: 2,448 bytes in 9 blocks
+==4109219==    still reachable: 1,816 bytes in 2 blocks
+==4109219==         suppressed: 0 bytes in 0 blocks
+==4109219== 
+==4109219== For lists of detected and suppressed errors, rerun with: -s
+==4109219== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)

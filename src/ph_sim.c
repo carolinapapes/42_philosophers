@@ -6,43 +6,79 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:32:07 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/28 17:17:51 by capapes          ###   ########.fr       */
+/*   Updated: 2024/06/29 23:57:37 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ph_philosophers.h"
 #include <sys/time.h>
+#include <stdlib.h>
 
-static void end(t_program *program, t_philosopher *philos)
+void free_philos(t_program *program)
+{
+	int	i;
+
+	i = -1;
+	while (++i < program->n_philosophers)
+	{
+		pthread_mutex_destroy(&program->philos[i].right_fork);
+	}
+	free(program->philos);
+}
+
+static void end(t_program *program)
 {
 	int i;
 
+	ph_philos__deaths(program);
 	i = -1;
 	while(++i < program->n_philosophers)
-		pthread_join(*philos[i].id, NULL); // JOIN_THREADS
+		pthread_join(program->philos[i].id, NULL); // JOIN THREADS
+	free_philos(program);
 }
 
 static void	launch(t_program *program)
 {
-	gettimeofday(&program->start_time, NULL);
+	ph_get_timeof_day_u(&program->start_time_u);
 	pthread_mutex_unlock(&program->start); // MUTEX_START__UNLOCK
 }
 
-static void	initialize(t_program *program, t_philosopher *philos)
+static void	initialize(t_program *program)
 {
 	pthread_mutex_init(&program->start, NULL); 
 	pthread_mutex_init(&program->write, NULL);
 	pthread_mutex_lock(&program->start); // MUTEX_START__LOCK
-	ph_philo__init(philos, program);
+	ph_philo__init(program);
+}
+
+
+void	print_philo(t_philosopher *philo)
+{
+	printf("\n-----------------------------------------------\n\n");
+	printf("PHILOSOPHER %p", philo);
+	printf(" %d\n", philo->index);
+	printf("| id\t\t%lu\n", philo->id);
+	printf("| lfork\t\t%p\n", philo->left_fork);
+	printf("| rfork\t\t%p\n", &philo->right_fork);
+	printf("| meals\t\t%d\n", philo->meals);
+	printf("| tmeal\t\t%llu\n", philo->last_meal);
+	printf("| prog\t\t%p\n\n", philo->program);
+}
+
+void	print_philos(t_philosopher *philos, t_program *program)
+{
+	int	i;
+
+	i = -1;
+	while (++i < program->n_philosophers)
+		print_philo(&philos[i]);
 }
 
 void   ph_sim(t_program *program)
 {
-	t_philosopher	*philos;
-
-	philos = NULL;
-	initialize(program, philos);
+	initialize(program);
 	launch(program);
-	end(program, philos);
+	end(program);
+
 	return ;
 }

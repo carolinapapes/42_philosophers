@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:37:56 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/28 15:05:05 by capapes          ###   ########.fr       */
+/*   Updated: 2024/06/30 00:10:53 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,32 @@
 
 static void check_death(t_philosopher *philo)
 {
-	unsigned long int	time_u;
+	unsigned long long	time_u;
+	unsigned long long	last_meal;
 	
 	ph_get_timeof_day_u(&time_u);
-	if (philo->program->time_to_die > time_u - philo->last_meal)
+	if (philo->last_meal)
+		last_meal = philo->last_meal;
+	else
+		last_meal = philo->program->start_time_u; 
+	if (time_u < last_meal + philo->program->time_to_die)
 		return ;
 	philo->program->is_dead = 1;
-	printf("%lu %d %s\n", (time_u - philo->program->start_time_u), philo->index, "died");
+	printf("PHILO %d\t\t%llu\tDIED -------------💀\n", philo->index, (time_u - last_meal)/1000);
 }
 
-void    ph_philos__deaths(t_philosopher *philos)
+void    ph_philos__deaths(t_program *program)
 {
 	int i;
 
-	i = -1;
-	while (++i < philos->program->n_philosophers && !philos->program->is_dead)
+	while (!program->is_dead)
 	{
-		usleep(2);
-		pthread_mutex_lock(&philos->program->write);
-		check_death(&philos[i]);
-		pthread_mutex_unlock(&philos->program->write);
+		usleep(10000);
+		pthread_mutex_lock(&program->write);
+		i = -1;
+		while (++i < program->n_philosophers)
+			check_death(&program->philos[i]);
+		pthread_mutex_unlock(&program->write);
+		
 	}	
 }
