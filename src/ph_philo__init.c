@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_philo__init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:52:12 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/29 23:29:53 by capapes          ###   ########.fr       */
+/*   Updated: 2024/06/30 01:40:58 by carolinapap      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@
 
 static void	mxcreate(t_philosopher *philos, int i, t_program *program)
 {
-	if(pthread_mutex_init(&philos[i].right_fork, NULL))  // FORK RIGHT INITIALIZATION
+	if (pthread_mutex_init(&philos[i].right_fork, NULL))
 		exit(1);
-	if (i != 0)	
+	if (i != 0)
 		philos[i].left_fork = &philos[i - 1].right_fork;
 	if (i == program->n_philosophers - 1)
 		philos[0].left_fork = &philos[i].right_fork;
 }
 
-static inline int thcreate(t_philosopher *philo)
+static inline int	thcreate(t_philosopher *philo)
 {
 	return (pthread_create(&philo->id, NULL, (void *)ph_philo__routine, philo));
 }
@@ -40,20 +40,16 @@ static inline int thcreate(t_philosopher *philo)
 // 	philo->program = program;
 // }
 
-
-inline static void  initialize(void *p, size_t n)
+inline static void	initialize(void *p, size_t n)
 {
 	memset(p, 0, n);
 }
-
-
-
 
 void	ph_philo__init(t_program *program)
 {
 	int	i;
 
-	program->philos = malloc(sizeof(t_philosopher) * program->n_philosophers); // needs cleaning
+	program->philos = malloc(sizeof(t_philosopher) * program->n_philosophers);
 	i = -1;
 	while (++i < program->n_philosophers)
 	{
@@ -62,12 +58,9 @@ void	ph_philo__init(t_program *program)
 		program->philos[i].index = i;
 		program->philos[i].meals = 0;
 		program->philos[i].last_meal = 0;
-        mxcreate(program->philos, i, program);
+		mxcreate(program->philos, i, program);
 	}
 	i = -1;
 	while (++i < program->n_philosophers)
 		thcreate(&program->philos[i]);
 }
-
-
-

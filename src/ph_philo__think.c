@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_philo__think.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 23:27:50 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/06/29 23:31:26 by capapes          ###   ########.fr       */
+/*   Updated: 2024/06/30 03:26:37 by carolinapap      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@ void	ph_philo__prethink(t_philosopher *philo)
 
 inline void	ph_philo__think(t_philosopher *philo)
 {
-	ph_philo__write(philo, "Thinks");
+	ph_philo__write(philo, "Is thinking");
 }

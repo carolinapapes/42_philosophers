@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -I./include -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -O3 -I./include -fsanitize=address
 SRC_DIR = ./src
 SRC = main.c \
 ft_isdigit.c \
