@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
+/*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 17:55:56 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/30 21:17:13 by carolinapap      ###   ########.fr       */
+/*   Updated: 2024/06/30 22:06:43 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ph_philosophers.h"
-#include <stdio.h>
 
 static void	initialize(t_program *program, int argc, char *argv[])
 {
@@ -26,7 +25,7 @@ static void	initialize(t_program *program, int argc, char *argv[])
 		program->n_meals = 0;
 }
 
-int	ph_parser__init(t_program *program, int argc, char *argv[])
+int	ph_parser(t_program *program, int argc, char *argv[])
 {
 	if (argc < 5 || argc > 6)
 	{
@@ -36,11 +35,6 @@ int	ph_parser__init(t_program *program, int argc, char *argv[])
 	if (!ft_are_str_int(argc, argv))
 	{
 		printf("Error: invalid argument. Must be a number > 0\n");
-		return (0);
-	}
-	if (ft_atoi(argv[1]) < 2)
-	{
-		printf("Error: invalid number of philosophers\n");
 		return (0);
 	}
 	initialize(program, argc, argv);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_philosophers.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
+/*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:51:17 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/30 21:15:08 by carolinapap      ###   ########.fr       */
+/*   Updated: 2024/06/30 21:56:44 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 # define PH_PHILOSOPHERS_H
 
 # include <pthread.h>
+# include <stddef.h>
+# include <stdlib.h>
+# include <stdio.h>
 # include <sys/time.h>
 # include <unistd.h>
 
-# include <stddef.h>
-
 # define STR_INT_MAX "2147483647"
-# define STR_INT_MIN "2147483648"
 
 typedef struct s_philosopher	t_philosopher;
 
@@ -65,8 +65,6 @@ void					ph_philo__prethink(t_philosopher *philo);
 void					ph_philos__deaths(t_program *program);
 void					ph_sim(t_program *program);
 void					ph_get_timeof_day_u(unsigned long int *time_u);
-int						ph_parser__init(t_program *program, int argc, \
-							char *argv[]);
-inline unsigned long int		time_diff_u(unsigned long int t1, \
-								unsigned long int t2);
+int						ph_parser(t_program *program, int argc, char *argv[]);
+
 #endif

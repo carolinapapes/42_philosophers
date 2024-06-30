@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ph_philo__sleep.c                                  :+:      :+:    :+:   */
+/*   ft_pointer_memset.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/25 23:23:57 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/06/30 22:06:52 by capapes          ###   ########.fr       */
+/*   Created: 2024/06/30 21:56:12 by capapes           #+#    #+#             */
+/*   Updated: 2024/06/30 21:56:50 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ph_philosophers.h"
+# include <string.h>
 
-void	ph_philo__sleep(t_philosopher *philo)
+inline static void	initialize_p(void *p, size_t n)
 {
-	if (philo->program->is_dead || !philo->left_fork)
-		return ;
-	ph_philo__write(philo, "is sleeping");
-	usleep(philo->program->time_to_sleep);
-	// should return if failed
+	memset(p, 0, n);
 }

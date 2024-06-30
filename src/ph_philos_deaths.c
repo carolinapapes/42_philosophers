@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ph_philos_deaths.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
+/*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:37:56 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/30 21:09:56 by carolinapap      ###   ########.fr       */
+/*   Updated: 2024/06/30 22:03:03 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ph_philosophers.h"
-#include <sys/time.h>
-#include <stdio.h>
 
 static void	check_death(t_philosopher *philo)
 {
@@ -23,8 +21,9 @@ static void	check_death(t_philosopher *philo)
 			time_u - philo->program->start_time_u)
 		return ;
 	philo->program->is_dead = 1;
-	printf("[%lu]\t%d\tDIED -------------💀\n", \
+	printf("%lu\t%d\tis dead💀\n", \
 		(time_u - philo->program->start_time_u) / 1000, philo->index + 1);
+	// should return if failed to print
 }
 
 void	ph_philos__deaths(t_program *program)
@@ -36,7 +35,9 @@ void	ph_philos__deaths(t_program *program)
 	while (!program->is_dead)
 	{
 		usleep(2000);
+		// should return if failed to sleep
 		pthread_mutex_lock(&program->write);
+		// should return if failed to lock
 		i = -1;
 		j = 0;
 		while (++i < program->n_philosophers && !program->is_dead)
@@ -49,5 +50,6 @@ void	ph_philos__deaths(t_program *program)
 				program->is_dead = 1;
 		}
 		pthread_mutex_unlock(&program->write);
+		// should return if failed to unlock
 	}
 }
