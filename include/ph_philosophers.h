@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_philosophers.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
+/*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:51:17 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/30 01:50:57 by carolinapap      ###   ########.fr       */
+/*   Updated: 2024/06/30 15:27:30 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	ft_isdigit(int c);
 int	ft_strlen(char *s);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 int	ft_isdigit(int c);
+int	ft_atoi(const char *str);
 
 typedef struct s_philosopher	t_philosopher;
 
@@ -73,5 +74,6 @@ void						ph_get_timeof_day_u(unsigned long int *time_u);
 // void						print_philo(t_philosopher *philo);
 inline unsigned long int	time_diff_u(unsigned long int t1, \
 								unsigned long int t2);
+void 						ph_philos__meals(t_program *program);
 
 #endif

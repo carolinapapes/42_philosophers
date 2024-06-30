@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_philo__write.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
+/*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 00:14:55 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/06/30 03:26:22 by carolinapap      ###   ########.fr       */
+/*   Updated: 2024/06/30 15:18:14 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void	ph_philo__write(t_philosopher *philo, char *str)
 	ph_get_timeof_day_u(&time_now);
 	time_diff = (time_now - philo->program->start_time_u) * 0.001;
 	if (!philo->program->is_dead)
-		printf("[%d]\t\t%lu\t%s\n", philo->index, time_diff, str);
+		printf("[%lu]\t\t%d\t%s\n", time_diff, philo->index + 1, str);
 	pthread_mutex_unlock(&philo->program->write);
 }

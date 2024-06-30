@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
+/*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:45:04 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/30 03:34:34 by carolinapap      ###   ########.fr       */
+/*   Updated: 2024/06/30 15:45:07 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,27 @@
 #include <unistd.h>
 #include <stdlib.h> 
 
-inline unsigned long int	get_random(unsigned long int max)
-{
-	return ((unsigned long int)rand() % max + 1);
-}
+// inline unsigned long int	get_random(unsigned long int max)
+// {
+// 	return ((unsigned long int)rand() % max + 1);
+// }
 
-static void	init(t_program *program)
-{
-	program->n_philosophers = 2;
-	program->time_to_die = 130000;
-	program->time_to_eat = 60000;
-	program->time_to_sleep = 60000;
-	program->is_dead = 0;
-}
+// static void	init(t_program *program)
+// {
+// 	program->n_philosophers = 2;
+// 	program->time_to_die = 130000;
+// 	program->time_to_eat = 60000;
+// 	program->time_to_sleep = 60000;
+// 	program->is_dead = 0;
+// 	program->n_meals = 3;
+// }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_program		program;
 
-	srand(time(NULL));
+	// srand(time(NULL));
+	
 	init(&program);
 	ph_sim(&program);
 	return (0);

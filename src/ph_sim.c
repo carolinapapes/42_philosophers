@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_sim.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
+/*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:32:07 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/30 01:51:50 by carolinapap      ###   ########.fr       */
+/*   Updated: 2024/06/30 14:50:07 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ void	free_philos(t_program *program)
 
 	i = -1;
 	while (++i < program->n_philosophers)
-	{
 		pthread_mutex_destroy(&program->philos[i].right_fork);
-	}
 	free(program->philos);
 }
 
@@ -41,6 +39,7 @@ static void	launch(t_program *program)
 {
 	ph_get_timeof_day_u(&program->start_time_u);
 	pthread_mutex_unlock(&program->start);
+	pthread_mutex_destroy(&program->start);
 }
 
 static void	initialize(t_program *program)

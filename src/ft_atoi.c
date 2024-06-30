@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ph_philo__routine.c                                :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/26 16:19:00 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/30 15:11:14 by capapes          ###   ########.fr       */
+/*   Created: 2024/01/12 17:54:32 by capapes           #+#    #+#             */
+/*   Updated: 2024/06/30 15:26:31 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ph_philosophers.h"
-
-void	ph_philo__routine(t_philosopher *philo)
+int	ft_atoi(const char *str)
 {
-	pthread_mutex_lock(&philo->program->start);
-	pthread_mutex_unlock(&philo->program->start);
-	ph_philo__prethink(philo);
-	while (!(philo->program->is_dead))
+	int	i;
+	int	n;
+	int	r;
+
+	i = 0;
+	n = 0;
+	r = 0;
+	while (str[i] == 32 || (str[i] > 8 && str[i] < 14))
+		i++;
+	if (str[i] == '+' || str[i] == '-')
 	{
-		ph_philo__eat(philo);
-		ph_philo__sleep(philo);
-		ph_philo__think(philo);
+		if (str[i] == '-')
+			n++;
+		i++;
 	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		r = r * 10 + (str[i] - '0');
+		i++;
+	}
+	if (n % 2 != 0)
+		r = r * -1;
+	return (r);
 }
