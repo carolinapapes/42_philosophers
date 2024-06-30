@@ -6,7 +6,7 @@
 /*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:52:12 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/30 01:40:58 by carolinapap      ###   ########.fr       */
+/*   Updated: 2024/06/30 21:06:14 by carolinapap      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,6 @@ static inline int	thcreate(t_philosopher *philo)
 {
 	return (pthread_create(&philo->id, NULL, (void *)ph_philo__routine, philo));
 }
-
-// static void initialize(t_philosopher *philo, t_program *program, int i)
-// {
-// 	philo->meals = 0;
-// 	philo->last_meal = 0;
-// 	philo->index = i;
-// 	philo->id = 0;
-// 	philo->left_fork = NULL;
-// 	philo->program = program;
-// }
 
 inline static void	initialize(void *p, size_t n)
 {

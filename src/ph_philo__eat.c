@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_philo__eat.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 23:33:38 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/06/30 15:34:47 by capapes          ###   ########.fr       */
+/*   Updated: 2024/06/30 21:03:01 by carolinapap      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static void	fork__drop(t_philosopher *philo)
 
 static void	meal__get(t_philosopher *philo)
 {
-	unsigned long int time_u;
+	unsigned long int	time_u;
+
 	ph_philo__write(philo, "is eating");
 	ph_get_timeof_day_u(&time_u);
 	philo->last_meal = time_u - philo->program->start_time_u;

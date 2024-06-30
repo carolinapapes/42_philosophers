@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 20:06:02 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/22 18:21:51 by capapes          ###   ########.fr       */
+/*   Updated: 2024/06/30 21:10:26 by carolinapap      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h> // for t_size
+#include <unistd.h>
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {

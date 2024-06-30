@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ph_philo__routine.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
+/*   By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:19:00 by capapes           #+#    #+#             */
-/*   Updated: 2024/06/30 15:11:14 by capapes          ###   ########.fr       */
+/*   Updated: 2024/06/30 20:56:06 by carolinapap      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
