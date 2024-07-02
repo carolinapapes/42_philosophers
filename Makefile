@@ -6,7 +6,7 @@
 #    By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/02 07:27:27 by carolinapap       #+#    #+#              #
-#    Updated: 2024/07/02 08:38:06 by carolinapap      ###   ########.fr        #
+#    Updated: 2024/07/02 08:58:39 by carolinapap      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = CC
 CFLAGS = -Wall -Wextra -Werror
 DEFLAGS = -MMD -MP
 DEBUGFLAGS = -g -fsanitize=address
-INCLUDE = -I./includes
+INCLUDE = -I./include
 
 PREQ = Makefile
 NAME = philosophers
