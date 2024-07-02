@@ -50,3 +50,16 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# macOS directories
+.DS_Store
+
+# vim swap files
+*.swp
+
+# shell script
+*.sh
+
+# project specific
+philosophers
+
