@@ -1,35 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mutex_write.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/02 07:53:35 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/02 22:25:30 by capapes          ###   ########.fr       */
+/*   Created: 2024/07/02 21:23:11 by carolinapap       #+#    #+#             */
+/*   Updated: 2024/07/02 22:24:32 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-#include <stdio.h>
 
-static int	init(t_program *program, char **argv)
+void	mutex_write(t_program *program, const char *s)
 {
-	if (program__init(argv, program))
-		return (1);
-	if (philos__init(program))
-		return (1);
-	return (0);
-}
-
-int	main(int argc, char **argv)
-{
-	t_program	program;
-
-	printf("argc: %d\n", argc);
-	if (init(&program, argv))
-		return (1);
-	program__mx_print(&program, program__print);
-	program__exit(&program, 0, CLEAN_FULL);
-	return (0);
+	pthread_mutex_lock(&program->mx_write);
+	ft_puterr(s);
+	pthread_mutex_unlock(&program->mx_write);
 }

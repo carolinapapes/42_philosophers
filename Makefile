@@ -6,7 +6,7 @@
 #    By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/02 07:27:27 by carolinapap       #+#    #+#              #
-#    Updated: 2024/07/02 08:58:39 by carolinapap      ###   ########.fr        #
+#    Updated: 2024/07/02 22:12:54 by carolinapap      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,17 @@ NAME = philosophers
 SRC_DIR = ./src
 BUILD_DIR = ./build
 
-SRC = main.c
+SRC = 	main.c \
+		debug.c \
+		fn_aux.c \
+		philo__clean.c \
+		philo__init.c \
+		philo__rutine.c \
+		philos__init.c \
+		philos__utils.c \
+		program__init.c \
+		program__utils.c
+
 OBJ = $(SRC:%.c=$(BUILD_DIR)/%.o)
 DEP = $(OBJ:%.o=%.d)
 BUG = val.sh
@@ -37,7 +47,7 @@ GREEN = \033[0;92m
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(INCLUDE) $(OBJ) -o $(NAME)
+	@$(CC) $(CFLAGS) $(INCLUDE) $(OBJ) -o $(NAME)
 	@echo "$(GREEN)$(NAME) has been created$(DEF_COLOR)"
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c $(PREQ) | $(BUILD_DIR)
@@ -63,6 +73,8 @@ bugs: all | $(BUG)
 $(BUG):
 	@echo 'export VAL="valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes"' > val.sh
 	@chmod +x val.sh
+
+re: fclean all
 
 -include $(DEP)
 
