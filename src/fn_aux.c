@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fn_aux.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/02 07:53:35 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/02 22:25:30 by capapes          ###   ########.fr       */
+/*   Created: 2024/07/02 22:11:43 by carolinapap       #+#    #+#             */
+/*   Updated: 2024/07/02 22:24:29 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
 #include <stdio.h>
+#include <unistd.h>
 
-static int	init(t_program *program, char **argv)
+int	ft_atoi__positive(const char *str)
 {
-	if (program__init(argv, program))
-		return (1);
-	if (philos__init(program))
-		return (1);
-	return (0);
+	int	r;
+
+	r = 0;
+	while (*str >= '0' && *str <= '9')
+		r = r * 10 + ((*str++) - '0');
+	return (r);
 }
 
-int	main(int argc, char **argv)
+int	ft_strlen(const char *s)
 {
-	t_program	program;
+	int	i;
 
-	printf("argc: %d\n", argc);
-	if (init(&program, argv))
-		return (1);
-	program__mx_print(&program, program__print);
-	program__exit(&program, 0, CLEAN_FULL);
-	return (0);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+void	ft_puterr(const char *s)
+{
+	write(2, s, ft_strlen(s));
 }
