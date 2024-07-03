@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 08:41:23 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/02 22:24:20 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/03 00:12:21 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_program
 	unsigned long int	time_to_die;
 	unsigned long int	time_to_eat;
 	unsigned long int	time_to_sleep;
+	unsigned long int	time_start;
 }	t_program;
 
 struct s_philosopher
@@ -59,7 +60,7 @@ struct s_philosopher
 	pthread_t					id;
 	int							index;
 	volatile int				meal_n;
-	volatile unsigned long int	mals_t;
+	volatile unsigned long int	meal_t;
 	pthread_mutex_t				*mx_fork_l;
 	pthread_mutex_t				mx_fork_r;
 	pthread_mutex_t				mx_meal;
