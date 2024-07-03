@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 19:58:52 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/02 22:24:28 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/03 00:55:33 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	philo__print(t_philo *philo)
 	printf("\n\nPHILO\n");
 	printf("philo->index: %d\n", philo->index);
 	printf("philo->meal_n: %d\n", philo->meal_n);
-	printf("philo->mals_t: %lu\n", philo->mals_t);
+	printf("philo->mals_t: %lu\n", philo->meal_t);
 	printf("philo->mx_fork_l: %p\n", philo->mx_fork_l);
 	printf("philo->mx_fork_r: %p\n", &philo->mx_fork_r);
 	printf("philo->mx_meal: %p\n", &philo->mx_meal);

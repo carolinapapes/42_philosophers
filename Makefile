@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: carolinapapes <carolinapapes@student.42    +#+  +:+       +#+         #
+#    By: capapes <capapes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/02 07:27:27 by carolinapap       #+#    #+#              #
-#    Updated: 2024/07/02 22:12:54 by carolinapap      ###   ########.fr        #
+#    Updated: 2024/07/03 00:56:02 by capapes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ BUILD_DIR = ./build
 SRC = 	main.c \
 		debug.c \
 		fn_aux.c \
-		philo__clean.c \
+		program__end.c \
 		philo__init.c \
 		philo__rutine.c \
 		philos__init.c \
