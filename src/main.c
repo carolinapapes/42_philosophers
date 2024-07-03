@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 07:53:35 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/03 01:03:47 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/03 20:41:41 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ int	main(int argc, char **argv)
 	printf("argc: %d\n", argc);
 	if (init(&program, argv))
 		return (1);
-	program__mx_print(&program, program__print);
+	program.time_start = get_time();
 	pthread_mutex_unlock(&program.mx_start);
+	philo__mx_checkdeaths(&program);
 	program__exit(&program, 0, CLEAN_FULL);
 	return (0);
 }

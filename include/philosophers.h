@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 08:41:23 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/03 00:12:21 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/03 21:19:01 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ typedef struct s_program
 	t_philo				*philos;
 	volatile int		philos_end;
 	int					philos_n;
-	unsigned long int	time_to_die;
-	unsigned long int	time_to_eat;
-	unsigned long int	time_to_sleep;
-	unsigned long int	time_start;
+	long int			time_to_die;
+	long int			time_to_eat;
+	long int			time_to_sleep;
+	long int			time_start;
 }	t_program;
 
 struct s_philosopher
@@ -60,7 +60,7 @@ struct s_philosopher
 	pthread_t					id;
 	int							index;
 	volatile int				meal_n;
-	volatile unsigned long int	meal_t;
+	volatile long int	meal_t;
 	pthread_mutex_t				*mx_fork_l;
 	pthread_mutex_t				mx_fork_r;
 	pthread_mutex_t				mx_meal;
@@ -77,12 +77,16 @@ void		philo__rutine(t_philo *philo);
 // UTILS SECTION
 int			philos__iter(t_program *program, int n, int (*f)(t_program *, int));
 void		program__mx_destroy(t_program *program, int i);
+long int	get_time(void);
+void	ft_puterr(const char *s);
 
 // CLEAUP
 int			philos__mx_destroy(t_program *program, int i);
 void		philo__mx_destroy(t_philo *philo, int i);
 int			philos__th_join(t_program *program, int i);
 int			program__exit(t_program *program, int n, int i);
+void		philo__mx_checkdeaths(t_program *program);
+void		philo__write(t_program *program, int *i, int index, char *str);
 
 // debugger
 void		philo__print(t_philo *philo);
@@ -90,5 +94,7 @@ void		program__print(t_program *program);
 void		program__mx_print(t_program *program, \
 				void (*f)(t_program *program));
 void		philo__mx_print(t_philo *philo, void (*f)(t_philo *philo));
+void		program__print_end(int j, t_program *program, t_philo *philo);
+void		philo__eat(t_philo *philo, int *i, t_program *program, int index);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:28:05 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/02 22:27:56 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/03 17:40:06 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static int	mx_init(t_program *program)
 		return (program__mx_destroy(program, MX_NONE), 1);
 	if (pthread_mutex_init(&program->mx_start, NULL))
 		return (program__mx_destroy(program, MX_END), 1);
+	pthread_mutex_lock(&program->mx_start);
 	if (pthread_mutex_init(&program->mx_write, NULL))
 		return (program__mx_destroy(program, MX_END | MX_START), 1);
 	return (0);

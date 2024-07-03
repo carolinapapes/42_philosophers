@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 19:58:52 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/03 00:55:33 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/03 20:41:16 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,12 @@ void	philo__mx_print(t_philo *philo, void (*f)(t_philo *philo))
 	pthread_mutex_lock(&philo->program->mx_write);
 	f(philo);
 	pthread_mutex_unlock(&philo->program->mx_write);
+}
+
+void	program__print_end(int j, t_program *program, t_philo *philo)
+{
+	printf("----------------%d died\n", j + 1);
+	printf("now %ld\n", get_time() - program->time_start);
+	printf("last meal %ld\n", philo->meal_t);
+	printf("time_to_die %ld\n", program->time_to_die);
 }

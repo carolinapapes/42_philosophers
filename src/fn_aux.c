@@ -6,12 +6,13 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:11:43 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/02 22:24:29 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/03 21:19:01 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
+#include <sys/time.h>
 
 int	ft_atoi__positive(const char *str)
 {
@@ -35,5 +36,15 @@ int	ft_strlen(const char *s)
 
 void	ft_puterr(const char *s)
 {
-	write(2, s, ft_strlen(s));
+	if (write(2, s, ft_strlen(s)))
+		return ;
+	return ;
+}
+
+long int	get_time(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000000 + time.tv_usec);
 }
