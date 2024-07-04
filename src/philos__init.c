@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:32:08 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/03 20:00:03 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/04 10:21:38 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,5 @@ int	philos__init(t_program *program)
 		return (ft_puterr(ERR_MUTEX), 1);
 	if (philos__iter(program, program->philos_n, philo__th_create))
 		return (ft_puterr(ERR_THREAD), 1);
-	philo__print(program->philos);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 13:07:15 by capapes           #+#    #+#             */
-/*   Updated: 2024/07/03 21:22:53 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/03 23:56:06 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 #include <stdio.h>
 #include <unistd.h>
 
-
-
 void	philo__mx_checkdeaths(t_program *program)
 {
-	int		i;
-	int		j;
-	int		k;
-	t_philo	*philo;
+	int			i;
+	int			j;
+	int			k;
+	t_philo		*philo;
+	long int	time;
 
+	time = program->time_start + program->time_to_die;
 	i = 1;
 	while (i)
 	{
@@ -32,8 +32,7 @@ void	philo__mx_checkdeaths(t_program *program)
 		{
 			philo = &program->philos[j];
 			pthread_mutex_lock(&philo->mx_meal);
-			if (philo->meal_t + program->time_to_die < \
-				get_time() - program->time_start)
+			if (philo->meal_t < get_time() - time)
 			{
 				pthread_mutex_lock(&program->mx_write);
 				printf("%ld %d died\n", (get_time() - \
@@ -57,3 +56,4 @@ void	philo__mx_checkdeaths(t_program *program)
 		}
 	}
 }
+
