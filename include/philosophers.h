@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 08:41:23 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/03 21:19:01 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/05 23:10:19 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,14 @@
 # define CLEAN_FREE 3
 # define CLEAN_PHILOS 7
 # define CLEAN_FULL 15
+# define CLEAN_START 31
 
 // ERRORS
 # define ERR_MALLOC "Philosophers: malloc error\n"
 # define ERR_ARGS "Philosophers: wrong arguments\n"
 # define ERR_MUTEX "Philosophers: mutex error\n"
 # define ERR_THREAD "Philosophers: thread error\n"
-
+# define ERR_INIT_FAIL 1
 // TYPES
 typedef struct s_philosopher	t_philo;
 
@@ -60,7 +61,7 @@ struct s_philosopher
 	pthread_t					id;
 	int							index;
 	volatile int				meal_n;
-	volatile long int	meal_t;
+	volatile long int			meal_t;
 	pthread_mutex_t				*mx_fork_l;
 	pthread_mutex_t				mx_fork_r;
 	pthread_mutex_t				mx_meal;
@@ -78,17 +79,18 @@ void		philo__rutine(t_philo *philo);
 int			philos__iter(t_program *program, int n, int (*f)(t_program *, int));
 void		program__mx_destroy(t_program *program, int i);
 long int	get_time(void);
-void	ft_puterr(const char *s);
+void		ft_puterr(const char *s);
 
 // CLEAUP
 int			philos__mx_destroy(t_program *program, int i);
 void		philo__mx_destroy(t_philo *philo, int i);
 int			philos__th_join(t_program *program, int i);
-int			program__exit(t_program *program, int n, int i);
-void		philo__mx_checkdeaths(t_program *program);
+void		program__exit(t_program *program, int n, int i);
+void		write__death(t_program *program, int j);
 void		philo__write(t_program *program, int *i, int index, char *str);
+void		program__check(t_program *program);
 
-// debugger
+// DEBUGGER
 void		philo__print(t_philo *philo);
 void		program__print(t_program *program);
 void		program__mx_print(t_program *program, \

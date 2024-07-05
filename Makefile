@@ -6,11 +6,11 @@
 #    By: capapes <capapes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/02 07:27:27 by carolinapap       #+#    #+#              #
-#    Updated: 2024/07/03 21:05:22 by capapes          ###   ########.fr        #
+#    Updated: 2024/07/04 15:41:14 by capapes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS = -Wall -Wextra -Werror -Ofast
+CFLAGS = -Wall -Wextra -Werror
 DEFLAGS = -MMD -MP 
 DEBUGFLAGS = -g  -fsanitize=thread 
 INCLUDE = -I./include

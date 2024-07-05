@@ -6,54 +6,58 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 13:07:15 by capapes           #+#    #+#             */
-/*   Updated: 2024/07/03 23:56:06 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/04 19:30:01 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-#include <stdio.h>
 #include <unistd.h>
 
-void	philo__mx_checkdeaths(t_program *program)
+static inline int	is_dead(t_philo *philo, long int time)
 {
-	int			i;
+	return (philo->meal_t < get_time() - time);
+}
+
+static inline int	is_done(t_philo *philo, t_program *program, int *k)
+{
+	return (philo->meal_n == program->meals_n && ++(*k) == program->philos_n);
+}
+
+static void	program__end(t_program *program, int *k, int j)
+{
+	pthread_mutex_lock(&program->mx_write);
+	program->philos_end = 1;
+	if (program->philos_n != *k)
+		write__death(program, j);
+	pthread_mutex_unlock(&program->mx_write);
+}
+
+int	philo__check(t_program *program, t_philo *philo, long int time, int *k)
+{
+	pthread_mutex_lock(&philo->mx_meal);
+	if (is_dead(philo, time) || is_done(philo, program, k))
+	{
+		program__end(program, k, philo->index);
+		pthread_mutex_unlock(&philo->mx_meal);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->mx_meal);
+	return (0);
+}
+
+void	program__check(t_program *program)
+{
 	int			j;
 	int			k;
-	t_philo		*philo;
 	long int	time;
 
 	time = program->time_start + program->time_to_die;
-	i = 1;
-	while (i)
+	while (42)
 	{
 		j = -1;
 		k = 0;
 		while (++j < program->philos_n)
-		{
-			philo = &program->philos[j];
-			pthread_mutex_lock(&philo->mx_meal);
-			if (philo->meal_t < get_time() - time)
-			{
-				pthread_mutex_lock(&program->mx_write);
-				printf("%ld %d died\n", (get_time() - \
-					program->time_start) / 1000, philo->index);
-				program->philos_end = 1;
-				i = 0;
-				pthread_mutex_unlock(&program->mx_write);
-				pthread_mutex_unlock(&philo->mx_meal);
-				break ;
-			}
-			if (philo->meal_n == program->meals_n)
-				k++;
-			pthread_mutex_unlock(&philo->mx_meal);
-		}
-		if (k == program->philos_n)
-		{
-			pthread_mutex_lock(&program->mx_write);
-			program->philos_end = 1;
-			i = 0;
-			pthread_mutex_unlock(&program->mx_write);
-		}
+			if (philo__check(program, &program->philos[j], time, &k))
+				return ;
 	}
 }
-

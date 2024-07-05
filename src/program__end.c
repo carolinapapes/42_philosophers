@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo__clean.c                                     :+:      :+:    :+:   */
+/*   program__end.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 20:01:31 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/02 22:24:33 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/05 23:10:36 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,12 @@ int	philos__free(t_program *program)
 
 //! check what happens when thread fails to create with n 
 //! launch program wait only for threads created
-int	program__exit(t_program *program, int n, int i)
+void	program__exit(t_program *program, int n, int i)
 {
 	if (n == 0)
 		n = program->philos_n;
+	if (CLEAN_START & i)
+		program__start(program, ERR_INIT_FAIL);
 	if (CLEAN_FULL & i)
 		philos__iter(program, n, philos__th_join);
 	if (CLEAN_PHILOS & i)
@@ -54,5 +56,4 @@ int	program__exit(t_program *program, int n, int i)
 		philos__free(program);
 	if (CLEAN_PROGRAM & i)
 		program__mx_destroy(program, MX_PROGRAM);
-	return (0);
 }
