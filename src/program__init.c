@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:28:05 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/03 17:40:06 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/06 22:52:59 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static inline void	initialize(t_program *program)
 	memset(program, 0, sizeof(t_program));
 }
 
+// check if number doesnt overflow
 static void	values_set(char **argv, t_program *program)
 {
 	program->philos_n = ft_atoi__positive(argv[1]);

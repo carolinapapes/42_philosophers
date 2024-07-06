@@ -6,19 +6,20 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 20:01:31 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/05 23:10:36 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/06 23:26:14 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include <stdlib.h>
 
-void	philo__mx_destroy(t_philo *philo, int i)
+int	philo__mx_destroy(t_philo *philo, int i)
 {
 	if (MX_MEAL & i)
 		pthread_mutex_destroy(&philo->mx_meal);
 	if (MX_FORK & i)
 		pthread_mutex_destroy(&philo->mx_fork_r);
+	return (0);
 }
 
 int	philos__mx_destroy(t_program *program, int i)
@@ -40,20 +41,14 @@ int	philos__free(t_program *program)
 	return (0);
 }
 
-//! check what happens when thread fails to create with n 
-//! launch program wait only for threads created
-void	program__exit(t_program *program, int n, int i)
+int	program__exit(t_program *program, int n, int i, int status)
 {
 	if (n == 0)
 		n = program->philos_n;
-	if (CLEAN_START & i)
-		program__start(program, ERR_INIT_FAIL);
-	if (CLEAN_FULL & i)
-		philos__iter(program, n, philos__th_join);
-	if (CLEAN_PHILOS & i)
-		philos__mx_destroy(program, n);
-	if (CLEAN_FREE & i)
-		philos__free(program);
-	if (CLEAN_PROGRAM & i)
-		program__mx_destroy(program, MX_PROGRAM);
+	i & CLEAN_START && program__start(program, ERR_INIT_FAIL);
+	i & CLEAN_FULL && philos__iter(program, n, philos__th_join);
+	i & CLEAN_PHILOS && philos__mx_destroy(program, n);
+	i & CLEAN_FREE && philos__free(program);
+	i & CLEAN_PROGRAM && program__mx_destroy(program, MX_PROGRAM);
+	return (status);
 }

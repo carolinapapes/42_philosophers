@@ -6,7 +6,7 @@
 #    By: capapes <capapes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/02 07:27:27 by carolinapap       #+#    #+#              #
-#    Updated: 2024/07/04 15:41:14 by capapes          ###   ########.fr        #
+#    Updated: 2024/07/07 01:16:01 by capapes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,9 +30,10 @@ SRC = 	main.c \
 		philos__init.c \
 		philo__eat.c \
 		philos__utils.c \
-		program__check.c \
 		program__init.c \
+		program__run.c \
 		program__utils.c \
+		mx__meals.c \
 		mutex_write.c
 
 OBJ = $(SRC:%.c=$(BUILD_DIR)/%.o)

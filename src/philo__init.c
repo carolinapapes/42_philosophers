@@ -34,7 +34,7 @@ int	philo__init(t_program *program, int i)
 	program->philos[i].program = program;
 	program->philos[i].index = i + 1;
 	if (mx_init(&program->philos[i]))
-		return (program__exit(program, i, CLEAN_PHILOS), 1);
+		return (program__exit(program, i, CLEAN_PHILOS, EXIT_FAILURE));
 	fork__add_ptr(program, i);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:32:08 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/05 23:00:19 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/07 00:07:00 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	allocate(t_program *program)
 {
 	program->philos = malloc(sizeof(t_philo) * program->philos_n);
 	if (!program->philos)
-		return (program__exit(program, 0, CLEAN_PROGRAM), 1);
+		return (program__exit(program, 0, CLEAN_PROGRAM, EXIT_FAILURE));
 	memset(program->philos, 0, sizeof(t_philo) * program->philos_n);
 	return (0);
 }
@@ -30,7 +30,7 @@ int	philo__th_create(t_program *program, int i)
 {
 	if (pthread_create(&program->philos[i].id, NULL, \
 		(void *)philo__rutine, &program->philos[i]))
-		return (program__exit(program, i, CLEAN_START), 1);
+		return (program__exit(program, i, CLEAN_START, EXIT_FAILURE));
 	return (0);
 }
 

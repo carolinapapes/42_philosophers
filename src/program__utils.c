@@ -12,7 +12,7 @@
 
 #include "philosophers.h"
 
-void	program__mx_destroy(t_program *program, int i)
+int	program__mx_destroy(t_program *program, int i)
 {
 	if (MX_START & i)
 		pthread_mutex_destroy(&program->mx_start);
@@ -20,4 +20,5 @@ void	program__mx_destroy(t_program *program, int i)
 		pthread_mutex_destroy(&program->mx_end);
 	if (MX_WRITE & i)
 		pthread_mutex_destroy(&program->mx_write);
+	return (0);
 }

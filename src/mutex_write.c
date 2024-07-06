@@ -6,25 +6,32 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 21:23:11 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/05 22:47:25 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/07 01:15:12 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include <stdio.h>
 
-void	philo__write(t_program *program, int *i, int index, char *str)
+static inline int	print_action(t_program *program, int index, char *str)
 {
-	pthread_mutex_lock(&program->mx_write);
-	if (program->philos_end)
+	return (printf("%ld %d %s\n", \
+		(get_time() - program->time_start) / 1000, index, str));
+}
+
+int	philo__write(t_program *program, int *i, int index, char *str)
+{
+	if (pthread_mutex_lock(&program->mx_write))
 	{
-		*i = 0;
-		pthread_mutex_unlock(&program->mx_write);
-		return ;
+		set_philo_error(&program->philos[index]);
+		return (1);
 	}
-	printf("%ld %d %s\n", (get_time() - \
-		program->time_start) / 1000, index, str);
+	if (program->philos_end)
+		*i = 0;
+	else
+		print_action(program, index, str);
 	pthread_mutex_unlock(&program->mx_write);
+	return (0);
 }
 
 void	program__write(t_program *program, int j)
