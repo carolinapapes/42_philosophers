@@ -14,11 +14,8 @@
 
 int	program__mx_destroy(t_program *program, int i)
 {
-	if (MX_START & i)
-		pthread_mutex_destroy(&program->mx_start);
-	if (MX_END & i)
-		pthread_mutex_destroy(&program->mx_end);
-	if (MX_WRITE & i)
-		pthread_mutex_destroy(&program->mx_write);
+	i & MX_START && pthread_mutex_destroy(&program->mx_start);
+	i & MX_END && pthread_mutex_destroy(&program->mx_end);
+	i & MX_WRITE && pthread_mutex_destroy(&program->mx_write);
 	return (0);
 }

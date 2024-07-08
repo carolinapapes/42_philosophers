@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 08:41:23 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/07 01:27:56 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/07 22:07:40 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include <pthread.h>
 
-#define EXIT_SUCCESS 0
-#define EXIT_FAILURE 1
+# define EXIT_SUCCESS 0
+# define EXIT_FAILURE 1
 
 // MX = mutex identifiers
 # define MX_NONE 0
@@ -44,6 +44,7 @@
 # define CLEAN__FROM_SET         5 // unlock meal mutex | set death | unlock forks
 # define CLEAN__MX_PUT           8
 # define CLEAN__FROM_PUT         9 //  unlock write mutex | unlock forks | set death
+# define CLEAN__MX_START         16
 
 // ERRORS
 # define ERR_MALLOC "Philosophers: malloc error\n"
@@ -98,7 +99,7 @@ void		ft_puterr(const char *s);
 int			philos__mx_destroy(t_program *program, int i);
 int			philo__mx_destroy(t_philo *philo, int i);
 int			philos__th_join(t_program *program, int i);
-int			philo__write(t_program *program, int *i, int index, char *str);
+int			philo__write(t_program *program, t_philo *philo, char *str);
 
 // DEBUGGER
 void		philo__print(t_philo *philo);

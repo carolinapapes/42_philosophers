@@ -6,12 +6,11 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:37:31 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/07 00:09:12 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/07 03:57:25 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-#include <stdio.h>
 
 int	philos__iter(t_program *program, int n, int (*f)(t_program *, int))
 {
@@ -44,5 +43,6 @@ int	exit_err(t_philo *philo, int err)
 	err & CLEAN__FORK_L && pthread_mutex_unlock(philo->mx_fork_l);
 	err & CLEAN__MX_SET && pthread_mutex_unlock(&philo->mx_meal);
 	err & CLEAN__MX_PUT && pthread_mutex_unlock(&philo->program->mx_write);
+	err & CLEAN__MX_START && pthread_mutex_unlock(&philo->program->mx_start);
 	return (1);
 }

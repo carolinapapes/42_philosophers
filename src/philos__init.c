@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:32:08 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/07 00:07:00 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/07 03:08:28 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	allocate(t_program *program)
 	return (0);
 }
 
-//! maybe program exit shoul return true when done. check implementation.
+//! maybe program exit should return true when done. check implementation.
 int	philo__th_create(t_program *program, int i)
 {
 	if (pthread_create(&program->philos[i].id, NULL, \

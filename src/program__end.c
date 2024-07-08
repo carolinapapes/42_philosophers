@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 20:01:31 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/06 23:26:14 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/07 03:09:49 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ int	philos__free(t_program *program)
 	return (0);
 }
 
-int	program__exit(t_program *program, int n, int i, int status)
+int	program__exit(t_program *program, int thphilos_n, int i, int status)
 {
-	if (n == 0)
-		n = program->philos_n;
+	if (thphilos_n == 0)
+		thphilos_n = program->philos_n;
 	i & CLEAN_START && program__start(program, ERR_INIT_FAIL);
-	i & CLEAN_FULL && philos__iter(program, n, philos__th_join);
-	i & CLEAN_PHILOS && philos__mx_destroy(program, n);
+	i & CLEAN_FULL && philos__iter(program, thphilos_n, philos__th_join);
+	i & CLEAN_PHILOS && philos__mx_destroy(program, thphilos_n);
 	i & CLEAN_FREE && philos__free(program);
 	i & CLEAN_PROGRAM && program__mx_destroy(program, MX_PROGRAM);
 	return (status);

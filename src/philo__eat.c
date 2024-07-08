@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:46:44 by capapes           #+#    #+#             */
-/*   Updated: 2024/07/07 00:08:14 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/07 03:59:57 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ static int	mx_forks(t_philo *philo, t_program *program, int action)
 	{
 		if (pthread_mutex_lock(&philo->mx_fork_r))
 			return (exit_err(philo, CLEAN__NONE));
-		if (philo__write(program, &philo->err, philo->index, "takes fork"))
+		if (philo__write(program, philo, "takes fork"))
 			return (exit_err(philo, CLEAN__FORK_R));
 		if (pthread_mutex_lock(philo->mx_fork_l))
 			return (exit_err(philo, CLEAN__FORK_R));
-		if (philo__write(program, &philo->err, philo->index, "takes fork"))
+		if (philo__write(program, philo, "takes fork"))
 			return (exit_err(philo, CLEAN__FORKS));
 		return (0);
 	}
