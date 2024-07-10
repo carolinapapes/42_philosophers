@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 21:23:11 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/07 04:00:45 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/08 23:46:24 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	philo__write(t_program *program, t_philo *philo, char *str)
 	if (program->philos_end)
 		philo->err = 1;
 	if (print_action__now(program, philo->index, str) == -1)
-		return (exit_err(philo, CLEAN__MX_PUT));
+		return (exit_(philo, CLEAN__MX_PUT));
 	pthread_mutex_unlock(&program->mx_write);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:37:31 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/07 03:57:25 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/08 23:46:24 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	set_philo_error(t_philo *philo)
 		pthread_mutex_unlock(&philo->mx_meal);
 }
 
-int	exit_err(t_philo *philo, int err)
+int	exit_(t_philo *philo, int err)
 {
 	set_philo_error(philo);
 	err & CLEAN__FORK_R && pthread_mutex_unlock(&philo->mx_fork_r);

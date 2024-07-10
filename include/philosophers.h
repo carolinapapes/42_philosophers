@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 08:41:23 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/07 22:07:40 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/09 00:06:51 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@
 # define CLEAN__MX_PUT           8
 # define CLEAN__FROM_PUT         9 //  unlock write mutex | unlock forks | set death
 # define CLEAN__MX_START         16
+
+#define FORK_GET 1
+#define FORK_DROP 0
 
 // ERRORS
 # define ERR_MALLOC "Philosophers: malloc error\n"
