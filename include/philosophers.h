@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 08:41:23 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/10 15:47:19 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/10 17:22:49 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PHILOSOPHERS_H
 
 # include <pthread.h>
+# include <stdio.h>
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
@@ -91,7 +92,7 @@ int					philo__init(t_program *program, int i);
 int					philos__init(t_program *program);
 int					program__init(char **argv, t_program *program);
 void				philo__rutine(t_philo *philo);
-extern int 			pr_action(unsigned long time, int index, char *str);
+int 				print_action(unsigned long time, int index, char *str);
 
 // UTILS SECTION
 int					philos__iter(t_program *program, int n, int (*f)(t_program *, int));
@@ -118,10 +119,11 @@ int					program__start(t_program *program, int err);
 int					program__status(t_program *program);
 void				set_philo_error(t_philo *philo);
 
-int					program__exit(t_program *program, int n, int i, int status);
-int					exit_err(t_philo *philo, int err);
+int					program__exit(t_program *program, int n, int i, int status); 
 int					exit_(t_philo *philo, int err);
 int					mx__meals(t_program *program, t_philo *philo, \
 					long int time, int *k);
 int					philo__usleep(t_philo *philo, int time, int err);
+int					mx_lock(t_philo *philo, pthread_mutex_t *mutex, int err);
+int					printf_e(t_program *program, t_philo *philo, char *str, int err);
 #endif

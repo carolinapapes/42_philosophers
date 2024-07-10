@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:28:05 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/06 22:52:59 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/10 17:30:28 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,7 @@ int	program__init(char **argv, t_program *program)
 {
 	initialize(program);
 	values_set(argv, program);
-	return (mx_init(program));
+	printf("philos_n: %d\n", program->philos_n);
+	mx_init(program);
+	return (0);
 }

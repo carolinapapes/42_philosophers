@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 14:38:47 by capapes           #+#    #+#             */
-/*   Updated: 2024/07/07 01:33:01 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/10 17:34:14 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	program__start(t_program *program, int err)
 {
+	printf("%s\n", __func__);
 	if (err)
 		program->philos_end = 1;
 	program->time_start = get_time();
@@ -26,6 +27,7 @@ int	program__start(t_program *program, int err)
 */
 int	program__status(t_program *program)
 {
+	printf("%s\n", __func__);
 	int			j;
 	int			k;
 	long int	time;

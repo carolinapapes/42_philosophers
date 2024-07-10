@@ -31,6 +31,7 @@ static void	fork__add_ptr(t_program *program, int i)
 
 int	philo__init(t_program *program, int i)
 {
+	printf("%s %d\n", __func__, i);
 	program->philos[i].program = program;
 	program->philos[i].index = i + 1;
 	if (mx_init(&program->philos[i]))

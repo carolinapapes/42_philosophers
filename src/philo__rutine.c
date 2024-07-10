@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 19:56:07 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/10 15:09:20 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/10 17:35:14 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int	philo__usleep(t_philo *philo, int time, int err)
 {
-	return (philo->err || (usleep(time) && exit_err(philo, err)));
+	return (philo->err || (usleep(time) && exit_(philo, err)));
 }
 
 static int	philo__sleep(t_program *program, t_philo *philo)
@@ -48,6 +48,7 @@ static inline void	odd_usleep(t_program *program, t_philo *philo)
 
 void	philo__rutine(t_philo *philo)
 {
+	printf("%s\n", __func__);
 	t_program	*program;
 
 	program = philo->program;
