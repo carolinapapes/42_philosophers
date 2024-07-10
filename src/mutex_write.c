@@ -6,18 +6,19 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 21:23:11 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/08 23:46:24 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/10 15:42:29 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include <stdio.h>
 
-static inline int	print_action(unsigned long time, int index, char *str)
+inline int print_action(unsigned long time, int index, char *str)
 {
 	return (printf("%ld %d %s\n", time, index, str));
 }
 
+extern pr_action((*print_action)(unsigned long time, int index, char *str));
 static inline int	print_action__now(t_program *program, int index, char *str)
 {
 	return (print_action(get_time() - program->time_start, index, str));

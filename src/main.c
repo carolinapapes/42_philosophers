@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 07:53:35 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/07 01:36:03 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/10 15:37:06 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 #include <stdio.h>
 
 #define START_WITHOUT_ERR 0
+
+extern inline int print_action(unsigned long time, int index, char *str)
+{
+	return (printf("%ld %d %s\n", time, index, str));
+}
 
 static int	init(t_program *program, char **argv)
 {

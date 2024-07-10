@@ -6,7 +6,7 @@
 #    By: capapes <capapes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/02 07:27:27 by carolinapap       #+#    #+#              #
-#    Updated: 2024/07/07 01:16:01 by capapes          ###   ########.fr        #
+#    Updated: 2024/07/10 15:34:57 by capapes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC_DIR = ./src
 BUILD_DIR = ./build
 
 SRC = 	main.c \
+		mutex_write.c\
 		debug.c \
 		fn_aux.c \
 		program__end.c \
@@ -34,7 +35,6 @@ SRC = 	main.c \
 		program__run.c \
 		program__utils.c \
 		mx__meals.c \
-		mutex_write.c
 
 OBJ = $(SRC:%.c=$(BUILD_DIR)/%.o)
 DEP = $(OBJ:%.o=%.d)
