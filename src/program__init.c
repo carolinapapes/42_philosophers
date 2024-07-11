@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:28:05 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/10 17:30:28 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/10 23:45:59 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,19 @@ static void	values_set(char **argv, t_program *program)
 
 static int	mx_init(t_program *program)
 {
-	if (pthread_mutex_init(&program->mx_end, NULL))
-		return (program__mx_destroy(program, MX_NONE), 1);
-	if (pthread_mutex_init(&program->mx_start, NULL))
-		return (program__mx_destroy(program, MX_END), 1);
-	pthread_mutex_lock(&program->mx_start);
-	if (pthread_mutex_init(&program->mx_write, NULL))
-		return (program__mx_destroy(program, MX_END | MX_START), 1);
-	return (0);
+	return (\
+	(pthread_mutex_init(&program->mx_end, NULL) \
+	&& (program__mx_destroy(program, MX_NONE), 1)) || \
+	(pthread_mutex_init(&program->mx_start, NULL) \
+	&& (program__mx_destroy(program, MX_END), 1)) || \
+	(pthread_mutex_init(&program->mx_write, NULL) \
+	&& program__mx_destroy(program, MX_END | MX_START)));
 }
 
 int	program__init(char **argv, t_program *program)
 {
 	initialize(program);
 	values_set(argv, program);
-	printf("philos_n: %d\n", program->philos_n);
 	mx_init(program);
 	return (0);
 }

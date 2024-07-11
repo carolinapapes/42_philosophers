@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 19:56:07 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/10 17:35:14 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/11 01:02:00 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,20 @@
 #include <sys/time.h>
 #include <unistd.h>
 
-int	philo__usleep(t_philo *philo, int time, int err)
+static inline int	philo__usleep(t_philo *philo, int time, int err)
 {
 	return (philo->err || (usleep(time) && exit_(philo, err)));
 }
 
-static int	philo__sleep(t_program *program, t_philo *philo)
+static inline int	philo__sleep(t_program *program, t_philo *philo)
 {
-	return (!philo__write(program, philo, "is sleeping") || \
+	return (philo__write(program, philo, "is sleeping") || \
 			philo__usleep(philo, program->time_to_sleep, CLEAN__NONE));
 }
 
 static inline int	philo__think(t_program *program, t_philo *philo)
 {
-	return (!philo__write(program, philo, "is thinking") \
+	return (philo__write(program, philo, "is thinking") \
 			&& exit_(philo, CLEAN__NONE));
 }
 
@@ -48,15 +48,14 @@ static inline void	odd_usleep(t_program *program, t_philo *philo)
 
 void	philo__rutine(t_philo *philo)
 {
-	printf("%s\n", __func__);
 	t_program	*program;
 
 	program = philo->program;
 	mx_start(program, philo);
 	odd_usleep(program, philo);
 	while (!philo->err && \
-			philo__eat(program, philo) && \
-			philo__sleep(program, philo) && \
-			philo__think(program, philo))
+			!philo__eat(program, philo) && \
+			!philo__sleep(program, philo) && \
+			!philo__think(program, philo))
 		;
 }

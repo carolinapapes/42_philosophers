@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:32:08 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/10 17:29:32 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/10 23:52:02 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,11 @@ int	philo__th_create(t_program *program, int i)
 
 int	philos__init(t_program *program)
 {
-		printf("PHILOS INIT\n");
 	if (allocate(program))
 		return (ft_puterr(ERR_MALLOC), 1);
 	if (philos__iter(program, program->philos_n, philo__init))
 		return (ft_puterr(ERR_MUTEX), 1);
 	if (philos__iter(program, program->philos_n, philo__th_create))
 		return (ft_puterr(ERR_THREAD), 1);
-
 	return (0);
 }

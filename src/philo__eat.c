@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:46:44 by capapes           #+#    #+#             */
-/*   Updated: 2024/07/10 17:09:07 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/11 00:56:40 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,47 +15,68 @@
 #include <sys/time.h>
 #include <unistd.h>
 
-int	mx_lock(t_philo *philo, pthread_mutex_t *mutex, int err)
+static inline int	mx_lock(t_philo *philo, pthread_mutex_t *mutex, int err)
 {
 	return (pthread_mutex_lock(mutex) && exit_(philo, err));
 }
 
-int	printf_e(t_program *program, t_philo *philo, char *str, int err)
+static inline int	printf_e(t_program *program, t_philo *philo, char *str, int err)
 {
 	return (philo__write(program, philo, str) && exit_(philo, err));
 }
 
-static inline int	mx_forks(t_philo *philo, t_program *program, int action)
+static inline int	philo__usleep(t_philo *philo, int time, int err)
 {
-	return (\
-		(action == FORK_GET && (\
-		mx_lock(philo, &philo->mx_fork_r, CLEAN__NONE) || \
-		printf_e(program, philo, "takes fork", CLEAN__FORK_L) || \
-		mx_lock(philo, philo->mx_fork_l, CLEAN__FORK_R) || \
-		printf_e(program, philo, "takes fork", CLEAN__FORK_R))) || (\
-		action == FORK_DROP && \
-		pthread_mutex_unlock(philo->mx_fork_l) | \
-		pthread_mutex_unlock(&philo->mx_fork_r)));
+	return (philo->err || (usleep(time) && exit_(philo, err)));
 }
 
-static int	mx_meal__set(t_philo *philo, t_program *program)
+static inline int	mx_forks__get(t_philo *philo, t_program *program)
+{
+	return (\
+		mx_lock(philo, &philo->mx_fork_r, CLEAN__NONE) || \
+		printf_e(program, philo, "takes fork", CLEAN__NONE) || \
+		mx_lock(philo, philo->mx_fork_l, CLEAN__FORK_R) || \
+		printf_e(program, philo, "takes fork", CLEAN__FORK_R) \
+	);
+}
+
+static inline int	mx_forks__drop(t_philo *philo)
+{
+	return (pthread_mutex_unlock(philo->mx_fork_l) | \
+			pthread_mutex_unlock(&philo->mx_fork_r));
+}
+
+static inline int	mx_meal__set(t_philo *philo, t_program *program)
 {
 	if (pthread_mutex_lock(&philo->mx_meal))
 		return (exit_(philo, CLEAN__FORKS));
 	philo->meal_n++;
 	philo->meal_t = get_time() - program->time_start;
 	pthread_mutex_unlock(&philo->mx_meal);
-	return (1);
+	return (0);
 }
+
+// static inline int	mx_meal__put(t_philo *philo, t_program *program)
+// {
+// 	if (mx_lock(philo, &program->mx_write, CLEAN__FORKS)) 
+// 		return (1);
+// 	if (program->philos_end)
+// 		return (exit_(philo, CLEAN__FROM_PUT));
+// 	if (print_action(philo->meal_t / 1000, philo->index, "is eating") == -1)
+// 		return (exit_(philo, CLEAN__FROM_PUT));
+// 	if (pthread_mutex_unlock(&program->mx_write))
+// 		return (exit_(philo, CLEAN__FROM_PUT));
+// 	return (0);
+// }
 
 static inline int	mx_meal__put(t_philo *philo, t_program *program)
 {
 	return (\
-			mx_lock(philo, &program->mx_write, CLEAN__FORKS) \
-			&& ((program->philos_end \
-			|| print_action(philo->meal_t / 1000, philo->index, "is eating") \
-			|| pthread_mutex_unlock(&program->mx_write))) \
-			&& exit_(philo, CLEAN__FROM_PUT));
+		mx_lock(philo, &program->mx_write, CLEAN__FORKS) || \
+		((program->philos_end || \
+		print_action(philo->meal_t / 1000, philo->index, "is eating") == -1) | \
+		pthread_mutex_unlock(&program->mx_write) \
+		&& exit_(philo, CLEAN__FROM_PUT)));
 }
 
 static inline int	mx_meal__exec(t_philo *philo, t_program *program)
@@ -66,9 +87,9 @@ static inline int	mx_meal__exec(t_philo *philo, t_program *program)
 int	philo__eat(t_program *program, t_philo *philo)
 {
 	return (\
-			mx_forks(philo, program, FORK_GET) && \
-			mx_meal__set(philo, program) && \
-			mx_meal__put(philo, program) && \
-			mx_meal__exec(philo, program) && \
-			mx_forks(philo, program, FORK_DROP));
+			mx_forks__get(philo, program) || \
+			mx_meal__set(philo, program) || \
+			mx_meal__put(philo, program) || \
+			mx_meal__exec(philo, program) || \
+			mx_forks__drop(philo));
 }
