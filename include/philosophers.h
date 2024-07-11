@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 08:41:23 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/11 00:27:53 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/11 18:20:52 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@
 # define CLEAN__MX_SET           4
 # define CLEAN__FROM_SET         5 // unlock meal mutex | set death | unlock forks
 # define CLEAN__MX_PUT           8
-# define CLEAN__FROM_PUT         9 //  unlock write mutex | unlock forks | set death
-# define CLEAN__MX_START         16
+# define CLEAN__FROM_PUT		9 //  unlock write mutex | unlock forks | set death
+# define CLEAN__MX_START		16
 
-#define FORK_GET 1
-#define FORK_DROP 0
+# define FORK_GET 				1
+# define FORK_DROP 				0
 
 // ERRORS
 # define ERR_MALLOC "Philosophers: malloc error\n"
@@ -95,6 +95,7 @@ int					philos__init(t_program *program);
 int					program__init(char **argv, t_program *program);
 void				philo__rutine(t_philo *philo);
 int					print_action(unsigned long time, int index, char *str);
+int					ph_parser(int argc, char *argv[]);
 
 // UTILS SECTION
 int					philos__iter(t_program *program, int n, int (*f)(t_program *, int));
@@ -125,4 +126,11 @@ int					program__exit(t_program *program, int n, int i, int status);
 int					exit_(t_philo *philo, int err);
 int					mx__meals(t_program *program, t_philo *philo, \
 					long int time, int *k);
+int					printf_e(t_program *program, t_philo *philo, char *str, int err);
+int					philo__usleep(t_philo *philo, int time, int err);
+int					mx_lock(t_philo *philo, pthread_mutex_t *mutex, int err);
+
+int					ft_strlen(const char *s);
+int 				ft_strncmp(const char *s1, const char *s2, size_t n);
+
 #endif

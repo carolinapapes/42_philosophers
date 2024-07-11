@@ -6,13 +6,13 @@
 #    By: capapes <capapes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/02 07:27:27 by carolinapap       #+#    #+#              #
-#    Updated: 2024/07/10 15:34:57 by capapes          ###   ########.fr        #
+#    Updated: 2024/07/11 18:09:47 by capapes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g  -O3  
 DEFLAGS = -MMD -MP 
-DEBUGFLAGS = -g  -fsanitize=thread 
+DEBUGFLAGS = -fsanitize=thread
 INCLUDE = -I./include
 
 PREQ = Makefile
@@ -25,6 +25,7 @@ SRC = 	main.c \
 		mutex_write.c\
 		debug.c \
 		fn_aux.c \
+		parser.c \
 		program__end.c \
 		philo__init.c \
 		philo__rutine.c \

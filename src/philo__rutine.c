@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 19:56:07 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/11 01:02:00 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/11 17:36:54 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <sys/time.h>
 #include <unistd.h>
 
-static inline int	philo__usleep(t_philo *philo, int time, int err)
+inline int	philo__usleep(t_philo *philo, int time, int err)
 {
 	return (philo->err || (usleep(time) && exit_(philo, err)));
 }
@@ -43,7 +43,8 @@ static inline void	mx_start(t_program *program, t_philo *philo)
 static inline void	odd_usleep(t_program *program, t_philo *philo)
 {
 	philo->index & 1 \
-	&& philo__usleep(philo, program->time_to_eat, CLEAN__NONE);
+	&& philo__usleep(philo, program->time_to_eat, CLEAN__NONE)
+	&& exit_(philo, CLEAN__NONE);
 }
 
 void	philo__rutine(t_philo *philo)

@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 20:01:31 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/10 23:55:46 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/11 17:57:58 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 
 int	philo__mx_destroy(t_philo *philo, int i)
 {
-	if (MX_MEAL & i)
-		pthread_mutex_destroy(&philo->mx_meal);
-	if (MX_FORK & i)
-		pthread_mutex_destroy(&philo->mx_fork_r);
+	i & MX_MEAL && pthread_mutex_destroy(&philo->mx_meal);
+	i & MX_FORK && pthread_mutex_destroy(&philo->mx_fork_r);
 	return (0);
 }
 
@@ -45,7 +43,7 @@ int	program__exit(t_program *program, int thphilos_n, int i, int status)
 {
 	if (thphilos_n == 0)
 		thphilos_n = program->philos_n;
-	i == CLEAN_START && program__start(program, ERR_INIT_FAIL);
+	i & CLEAN_START && program__start(program, ERR_INIT_FAIL);
 	i & CLEAN_FULL && philos__iter(program, thphilos_n, philos__th_join);
 	i & CLEAN_PHILOS && philos__mx_destroy(program, thphilos_n);
 	i & CLEAN_FREE && philos__free(program);

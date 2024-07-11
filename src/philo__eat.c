@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:46:44 by capapes           #+#    #+#             */
-/*   Updated: 2024/07/11 00:56:40 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/11 17:57:21 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,18 @@
 #include <sys/time.h>
 #include <unistd.h>
 
-static inline int	mx_lock(t_philo *philo, pthread_mutex_t *mutex, int err)
+inline int	mx_lock(t_philo *philo, pthread_mutex_t *mutex, int err)
 {
 	return (pthread_mutex_lock(mutex) && exit_(philo, err));
-}
-
-static inline int	printf_e(t_program *program, t_philo *philo, char *str, int err)
-{
-	return (philo__write(program, philo, str) && exit_(philo, err));
-}
-
-static inline int	philo__usleep(t_philo *philo, int time, int err)
-{
-	return (philo->err || (usleep(time) && exit_(philo, err)));
 }
 
 static inline int	mx_forks__get(t_philo *philo, t_program *program)
 {
 	return (\
 		mx_lock(philo, &philo->mx_fork_r, CLEAN__NONE) || \
-		printf_e(program, philo, "takes fork", CLEAN__NONE) || \
+		printf_e(program, philo, "takes fork", CLEAN__FORK_R) || \
 		mx_lock(philo, philo->mx_fork_l, CLEAN__FORK_R) || \
-		printf_e(program, philo, "takes fork", CLEAN__FORK_R) \
+		printf_e(program, philo, "takes fork", CLEAN__FORKS) \
 	);
 }
 
@@ -55,19 +45,6 @@ static inline int	mx_meal__set(t_philo *philo, t_program *program)
 	pthread_mutex_unlock(&philo->mx_meal);
 	return (0);
 }
-
-// static inline int	mx_meal__put(t_philo *philo, t_program *program)
-// {
-// 	if (mx_lock(philo, &program->mx_write, CLEAN__FORKS)) 
-// 		return (1);
-// 	if (program->philos_end)
-// 		return (exit_(philo, CLEAN__FROM_PUT));
-// 	if (print_action(philo->meal_t / 1000, philo->index, "is eating") == -1)
-// 		return (exit_(philo, CLEAN__FROM_PUT));
-// 	if (pthread_mutex_unlock(&program->mx_write))
-// 		return (exit_(philo, CLEAN__FROM_PUT));
-// 	return (0);
-// }
 
 static inline int	mx_meal__put(t_philo *philo, t_program *program)
 {
@@ -93,3 +70,16 @@ int	philo__eat(t_program *program, t_philo *philo)
 			mx_meal__exec(philo, program) || \
 			mx_forks__drop(philo));
 }
+
+// static inline int	mx_meal__put(t_philo *philo, t_program *program)
+// {
+// 	if (mx_lock(philo, &program->mx_write, CLEAN__FORKS)) 
+// 		return (1);
+// 	if (program->philos_end)
+// 		return (exit_(philo, CLEAN__FROM_PUT));
+// 	if (print_action(philo->meal_t / 1000, philo->index, "is eating") == -1)
+// 		return (exit_(philo, CLEAN__FROM_PUT));
+// 	if (pthread_mutex_unlock(&program->mx_write))
+// 		return (exit_(philo, CLEAN__FROM_PUT));
+// 	return (0);
+// }
