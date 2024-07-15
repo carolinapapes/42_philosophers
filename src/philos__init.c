@@ -6,11 +6,13 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:32:08 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/10 23:52:02 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/12 01:03:39 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include "philo.h"
+#include "philo_helpers.h"
 #include "utils.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -36,11 +38,9 @@ int	philo__th_create(t_program *program, int i)
 
 int	philos__init(t_program *program)
 {
-	if (allocate(program))
-		return (ft_puterr(ERR_MALLOC), 1);
-	if (philos__iter(program, program->philos_n, philo__init))
-		return (ft_puterr(ERR_MUTEX), 1);
-	if (philos__iter(program, program->philos_n, philo__th_create))
-		return (ft_puterr(ERR_THREAD), 1);
-	return (0);
+	return (\
+	(allocate(program) && (ft_puterr(ERR_MALLOC), 1)) || \
+	(philos__iter(program, 0, philo__init) && ft_puterr(ERR_MUTEX)) || \
+	(philos__iter(program, 0, philo__th_create) && ft_puterr(ERR_THREAD)) \
+	);
 }

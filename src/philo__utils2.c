@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   philo__utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/02 07:53:35 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/11 19:29:33 by capapes          ###   ########.fr       */
+/*   Created: 2024/07/13 11:27:54 by capapes           #+#    #+#             */
+/*   Updated: 2024/07/13 11:28:19 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-#include <stdio.h>
 
-int	main(int argc, char **argv)
+int	philos__iter(t_program *program, int n, int (*f)(t_program *, int))
 {
-	t_program	program;
+	int	i;
+	int	j;
 
-	printf("ARGC: %d\n", argc);
-	return (\
-	ph_parser(argc, argv) || \
-	program__init(argv, &program) || \
-	philos__init(&program) || \
-	program__start(&program, START_WITHOUT_ERR) || \
-	program__status(&program) || \
-	program__exit(&program, 0, CLEAN_FULL, 0));
+	i = -1;
+	j = 0;
+	if (!n)
+		n = program->philos_n;
+	while (++i < n && !j)
+		j = f(program, i);
+	return (j);
 }

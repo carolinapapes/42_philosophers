@@ -6,23 +6,21 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 20:01:31 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/11 17:57:58 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/12 14:03:11 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include <stdlib.h>
-
-int	philo__mx_destroy(t_philo *philo, int i)
-{
-	i & MX_MEAL && pthread_mutex_destroy(&philo->mx_meal);
-	i & MX_FORK && pthread_mutex_destroy(&philo->mx_fork_r);
-	return (0);
-}
+#include "philo_helpers.h"
 
 int	philos__mx_destroy(t_program *program, int i)
 {
-	philo__mx_destroy(&(program->philos[i]), MX_PHILO);
+	t_philo	philo;
+
+	philo = program->philos[i];
+	pthread_mutex_destroy(&philo.mx_meal);
+	pthread_mutex_destroy(&philo.mx_fork_r);
 	return (0);
 }
 

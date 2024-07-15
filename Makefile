@@ -6,11 +6,11 @@
 #    By: capapes <capapes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/02 07:27:27 by carolinapap       #+#    #+#              #
-#    Updated: 2024/07/11 18:09:47 by capapes          ###   ########.fr        #
+#    Updated: 2024/07/12 17:50:51 by capapes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS = -Wall -Wextra -Werror -g  -O3  
+CFLAGS = -Wall -Wextra -Werror
 DEFLAGS = -MMD -MP 
 DEBUGFLAGS = -fsanitize=thread
 INCLUDE = -I./include
@@ -22,15 +22,16 @@ SRC_DIR = ./src
 BUILD_DIR = ./build
 
 SRC = 	main.c \
-		mutex_write.c\
+		action.c\
 		debug.c \
 		fn_aux.c \
 		parser.c \
 		program__end.c \
 		philo__init.c \
+		philo__forks.c \
+		philo_exit.c \
 		philo__rutine.c \
 		philos__init.c \
-		philo__eat.c \
 		philos__utils.c \
 		program__init.c \
 		program__run.c \

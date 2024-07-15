@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 14:38:47 by capapes           #+#    #+#             */
-/*   Updated: 2024/07/11 16:11:07 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/12 14:41:08 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	program__start(t_program *program, int err)
 		program->philos_end = 1;
 	program->time_start = get_time();
 	pthread_mutex_unlock(&program->mx_start);
-	return (0);
+	return (program->time_start < 0);
 }
 
 int	program__status(t_program *program)

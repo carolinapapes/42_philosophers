@@ -1,28 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo__rutine.c                                    :+:      :+:    :+:   */
+/*   philo__actions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/02 19:56:07 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/12 17:57:01 by capapes          ###   ########.fr       */
+/*   Created: 2024/07/11 23:40:15 by capapes           #+#    #+#             */
+/*   Updated: 2024/07/12 17:42:32 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
 #include "philo.h"
-#include "philo_helpers.h"
-
-static inline void	_start(t_program *program, t_philo *philo)
-{
-	((pthread_mutex_lock(&program->mx_start) || \
-	program->philos_end | \
-	pthread_mutex_unlock(&program->mx_start)) || \
-	(philo->index & 1 \
-	&& philo__usleep(philo, program->time_to_eat - 900, PHILO_ERRR))) \
-	&& exit_(philo, PHILO_ERRR);
-}
+#include "philosophers.h"
 
 static inline int	_sleep(t_program *program, t_philo *philo)
 {
@@ -44,15 +33,11 @@ static inline int	_eat(t_program *program, t_philo *philo)
 		forks__drop(philo));
 }
 
-void	philo__rutine(t_philo *philo)
+void	philo__actions(t_program *program, t_philo *philo)
 {
-	t_program	*program;
-
-	program = philo->program;
-	_start(program, philo);
 	while (!philo->err && \
-		!_eat(program, philo) && \
-		!_sleep(program, philo) && \
-		!_think(program, philo))
+			!_eat(program, philo) && \
+			!_sleep(program, philo) && \
+			!_think(program, philo))
 		;
 }

@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 08:41:23 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/11 18:20:52 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/12 17:43:49 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define MX_FORK 8
 # define MX_MEAL 10
 # define MX_PHILO 18
+# define MX_FULL 31
 
 // CLEAN = cleanup identifiers - see program__exit
 # define CLEAN_PROGRAM 1
@@ -38,19 +39,8 @@
 # define CLEAN_FULL 15
 # define CLEAN_START 31
 
-// CLEAN PHILOS
-# define CLEAN__NONE             0
-# define CLEAN__FORK_R           1
-# define CLEAN__FORK_L           2
-# define CLEAN__FORKS            3
-# define CLEAN__MX_SET           4
-# define CLEAN__FROM_SET         5 // unlock meal mutex | set death | unlock forks
-# define CLEAN__MX_PUT           8
-# define CLEAN__FROM_PUT		9 //  unlock write mutex | unlock forks | set death
-# define CLEAN__MX_START		16
+# define STR_INT_MAX "2147483647"
 
-# define FORK_GET 				1
-# define FORK_DROP 				0
 
 // ERRORS
 # define ERR_MALLOC "Philosophers: malloc error\n"
@@ -94,20 +84,17 @@ int					philo__init(t_program *program, int i);
 int					philos__init(t_program *program);
 int					program__init(char **argv, t_program *program);
 void				philo__rutine(t_philo *philo);
-int					print_action(unsigned long time, int index, char *str);
 int					ph_parser(int argc, char *argv[]);
 
 // UTILS SECTION
-int					philos__iter(t_program *program, int n, int (*f)(t_program *, int));
 int					program__mx_destroy(t_program *program, int i);
 long int			get_time(void);
-void				ft_puterr(const char *s);
+int					ft_puterr(const char *s);
 
 // CLEAUP
 int					philos__mx_destroy(t_program *program, int i);
-int					philo__mx_destroy(t_philo *philo, int i);
 int					philos__th_join(t_program *program, int i);
-int					philo__write(t_program *program, t_philo *philo, char *str);
+int					philo__meal(t_philo *philo, t_program *program);
 
 // DEBUGGER
 void				philo__print(t_philo *philo);
@@ -116,21 +103,23 @@ void				program__mx_print(t_program *program, \
 					void (*f)(t_program *program));
 void				philo__mx_print(t_philo *philo, void (*f)(t_philo *philo));
 void				program__print_end(int j, t_program *program, t_philo *philo);
-int					philo__eat(t_program *program, t_philo *philo);
 
 int					program__start(t_program *program, int err);
 int					program__status(t_program *program);
-void				set_philo_error(t_philo *philo);
 
 int					program__exit(t_program *program, int n, int i, int status); 
-int					exit_(t_philo *philo, int err);
 int					mx__meals(t_program *program, t_philo *philo, \
 					long int time, int *k);
-int					printf_e(t_program *program, t_philo *philo, char *str, int err);
 int					philo__usleep(t_philo *philo, int time, int err);
 int					mx_lock(t_philo *philo, pthread_mutex_t *mutex, int err);
 
 int					ft_strlen(const char *s);
-int 				ft_strncmp(const char *s1, const char *s2, size_t n);
-
+int					ft_strncmp(const char *s1, const char *s2, size_t n);
+int					ph_parser(int argc, char *argv[]);
+int					check_philo_end(t_program *program, t_philo *philo, int err);
+int					action(unsigned long time, int index, char *str);
+int					action__now(t_program *program, t_philo *philo, char *str, int err);
+void				philo__actions(t_program *program, t_philo *philo);
+int					forks__get(t_philo *philo, t_program *program);
+int					forks__drop(t_philo *philo);
 #endif

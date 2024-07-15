@@ -6,43 +6,36 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:37:31 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/11 17:38:43 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/13 11:28:30 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include "philo.h"
+#include "philo_helpers.h"
+#include <unistd.h>
 
-int	philos__iter(t_program *program, int n, int (*f)(t_program *, int))
+inline int	mx_lock(t_philo *philo, pthread_mutex_t *mutex, int err)
 {
-	int	i;
-	int	j;
-
-	i = -1;
-	j = 0;
-	while (++i < n && !j)
-		j = f(program, i);
-	return (j);
+	return (pthread_mutex_lock(mutex) && exit_(philo, err));
 }
 
-void	set_philo_error(t_philo *philo)
+inline int	mx_unlock(t_philo *philo, pthread_mutex_t *mutex, int err)
 {
-	int	unlock;
-
-	unlock = 1;
-	if (pthread_mutex_lock(&philo->mx_meal))
-		unlock = 0;
-	philo->err = 1;
-	if (unlock)
-		pthread_mutex_unlock(&philo->mx_meal);
+	return (pthread_mutex_unlock(mutex) && exit_(philo, err));
 }
 
-int	exit_(t_philo *philo, int err)
+inline int	philo__mx_init(t_philo *philo, pthread_mutex_t *mutex, int err)
 {
-	set_philo_error(philo);
-	err & CLEAN__FORK_R && pthread_mutex_unlock(&philo->mx_fork_r);
-	err & CLEAN__FORK_L && pthread_mutex_unlock(philo->mx_fork_l);
-	err & CLEAN__MX_SET && pthread_mutex_unlock(&philo->mx_meal);
-	err & CLEAN__MX_PUT && pthread_mutex_unlock(&philo->program->mx_write);
-	err & CLEAN__MX_START && pthread_mutex_unlock(&philo->program->mx_start);
-	return (1);
+	return (pthread_mutex_init(mutex, NULL) && exit_(philo, err));
+}
+
+inline int	philo__mx_destroy(t_philo *philo, pthread_mutex_t *mutex, int err)
+{
+	return (pthread_mutex_destroy(mutex) && exit_(philo, err));
+}
+
+inline int	philo__usleep(t_philo *philo, int time, int err)
+{
+	return (philo->err || (usleep(time) && exit_(philo, err)));
 }

@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   action.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/02 07:53:35 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/11 19:29:33 by capapes          ###   ########.fr       */
+/*   Created: 2024/07/02 21:23:11 by carolinapap       #+#    #+#             */
+/*   Updated: 2024/07/12 17:15:31 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include <stdio.h>
+#include "philo_helpers.h"
 
-int	main(int argc, char **argv)
+inline int	action(unsigned long time, int index, char *str)
 {
-	t_program	program;
+	return (printf("%ld %d %s\n", time, index, str) == -1);
+}
 
-	printf("ARGC: %d\n", argc);
-	return (\
-	ph_parser(argc, argv) || \
-	program__init(argv, &program) || \
-	philos__init(&program) || \
-	program__start(&program, START_WITHOUT_ERR) || \
-	program__status(&program) || \
-	program__exit(&program, 0, CLEAN_FULL, 0));
+inline int	action__now(t_program *program, t_philo *philo, char *str, int err)
+{
+	long	time;
+
+	time = (get_time() - program->time_start) * 0.001;
+	return ((\
+			program->philos_end || philo->err || time < 0 || \
+			action(time, philo->index, str)) \
+			&& exit_(philo, err));
 }
