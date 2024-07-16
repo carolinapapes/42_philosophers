@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:11:43 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/13 11:10:57 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/16 16:23:51 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include <sys/time.h>
 
-int	ft_atoi__positive(const char *str)
+int	atoi__parser(const char *str)
 {
 	int	r;
 

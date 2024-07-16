@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 07:53:35 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/16 14:59:36 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/16 16:23:06 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ int	main(int argc, char **argv)
 	program__init(argv, &program) || \
 	philos__init(&program) || \
 	program__start(&program, START_WITHOUT_ERR) || \
-	program__status(&program) || \
+	program__run(&program) || \
 	program__exit(&program, 0, CLEAN_FULL, 0));
 }

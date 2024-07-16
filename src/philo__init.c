@@ -21,7 +21,7 @@ static int	_init(t_philo *philo)
 		philo__mx_init(philo, &philo->mx_fork_r, PHILO_ERR_MEAL_INIT));
 }
 
-static void	fork__add_ptr(t_program *program, int i)
+static void	_fork__add_ptr(t_program *program, int i)
 {
 	if (i == program->philos_n - 1)
 		program->philos[0].mx_fork_l = &program->philos[i].mx_fork_r;
@@ -35,6 +35,6 @@ int	philo__init(t_program *program, int i)
 	program->philos[i].index = i + 1;
 	if (_init(&program->philos[i]))
 		return (program__exit(program, i, CLEAN_PHILOS, EXIT_FAILURE));
-	fork__add_ptr(program, i);
+	_fork__add_ptr(program, i);
 	return (0);
 }

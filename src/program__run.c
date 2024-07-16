@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 14:38:47 by capapes           #+#    #+#             */
-/*   Updated: 2024/07/12 14:41:08 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/16 16:14:05 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	program__start(t_program *program, int err)
 	return (program->time_start < 0);
 }
 
-int	program__status(t_program *program)
+int	program__run(t_program *program)
 {
 	int			j;
 	int			k;
@@ -37,9 +37,8 @@ int	program__status(t_program *program)
 		j = -1;
 		k = 0;
 		while (++j < program->philos_n)
-			if (mx__meals(program, &program->philos[j], time, &k))
+			if (program__status(program, &program->philos[j], time, &k))
 				return (1);
 	}
-	printf("Complete %s\n", __func__);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 08:41:23 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/16 15:00:15 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/16 16:51:47 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define MX_FULL 31
 
 // CLEAN = cleanup identifiers - see program__exit
-# define CLEAN_PROGRAM 1
+# define CLEAN_PROGRAM_MX 1
 # define CLEAN_FREE 3
 # define CLEAN_PHILOS 7
 # define CLEAN_FULL 15
@@ -83,45 +83,54 @@ int					parser(int argc, char *argv[]);
 
 // INIT SECTION
 int					philo__init(t_program *program, int i);
-int					philos__init(t_program *program);
-int					program__init(char **argv, t_program *program);
+int					philo__meal(t_philo *philo, t_program *program);
 void				philo__rutine(t_philo *philo);
-int					ph_parser(int argc, char *argv[]);
+int					philo__usleep(t_philo *philo, int time, int err);
+int					philo__mx_lock(t_philo *philo, \
+						pthread_mutex_t *mutex, int err);
+
+int					philos__init(t_program *program);
+int					philos__th_join(t_program *program, int i);
+int					philos__mx_destroy(t_program *program, int i);
 
 // UTILS SECTION
-int					program__mx_destroy(t_program *program, int i);
 long int			get_time(void);
 int					ft_puterr(const char *s);
 
-// CLEAUP
-int					philos__mx_destroy(t_program *program, int i);
-int					philos__th_join(t_program *program, int i);
-int					philo__meal(t_philo *philo, t_program *program);
-
-// DEBUGGER
-void				philo__print(t_philo *philo);
-void				program__print(t_program *program);
-void				program__mx_print(t_program *program, \
-					void (*f)(t_program *program));
-void				philo__mx_print(t_philo *philo, void (*f)(t_philo *philo));
-void				program__print_end(int j, t_program *program, t_philo *philo);
-
+// PROGRAM SECTION
+int					program__init(char **argv, t_program *program);
+int					program__exit(t_program *program, int n, int i, int status);
+int					program__run(t_program *program);
 int					program__start(t_program *program, int err);
-int					program__status(t_program *program);
+int					program__status(t_program *program, t_philo *philo, \
+						long int time, int *k);
 
-int					program__exit(t_program *program, int n, int i, int status); 
-int					mx__meals(t_program *program, t_philo *philo, \
-					long int time, int *k);
-int					philo__usleep(t_philo *philo, int time, int err);
-int					mx_lock(t_philo *philo, pthread_mutex_t *mutex, int err);
+// PROGRAM SYSTEM UTILS
+int					program__mx_destroy(t_program *program, int i);
+int					program__mx_init(t_program *program, \
+						pthread_mutex_t *mutex, int err);
+int					program__mx_lock(t_program *program, \
+						pthread_mutex_t *mutex, int err);
+
 int					is_int(char *s, int type);
 
 int					ft_strlen(const char *s);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
-int					check_philo_end(t_program *program, t_philo *philo, int err);
+int					check_philo_end(t_program *program, \
+						t_philo *philo, int err);
 int					action(unsigned long time, int index, char *str);
-int					action__now(t_program *program, t_philo *philo, char *str, int err);
+int					action__now(t_program *program, \
+						t_philo *philo, char *str, int err);
 void				philo__actions(t_program *program, t_philo *philo);
 int					forks__get(t_philo *philo, t_program *program);
 int					forks__drop(t_philo *philo);
+
+// DEBUGGER
+// void				program__print(t_program *program);
+// void				program__print_end(int j, t_program *program, \t_philo *philo);
+// void				program__mx_print(t_program *program, \
+// 					void (*f)(t_program *program));
+// void				philo__print(t_philo *philo);
+// void				philo__mx_print(t_philo *philo, void (*f)(t_philo *philo));
+
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mx__meals.c                                        :+:      :+:    :+:   */
+/*   program__status.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 13:07:15 by capapes           #+#    #+#             */
-/*   Updated: 2024/07/12 17:54:45 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/16 16:12:05 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	_end(t_program *program, int *k, int j)
 	return (1);
 }
 
-int	mx__meals(t_program *program, t_philo *philo, \
+int	program__status(t_program *program, t_philo *philo, \
 				long int time, int *k)
 {
 	return ((\

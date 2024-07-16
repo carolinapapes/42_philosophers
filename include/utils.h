@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 09:24:57 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/13 11:20:10 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/16 16:25:01 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #define NON_ZERO 1
 
-int			ft_atoi__positive(const char *str);
+int			atoi__parser(const char *str);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif

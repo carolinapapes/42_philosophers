@@ -19,3 +19,17 @@ int	program__mx_destroy(t_program *program, int i)
 	i & MX_WRITE && pthread_mutex_destroy(&program->mx_write);
 	return (0);
 }
+
+inline int	program__mx_init(t_program *program, \
+	pthread_mutex_t *mutex, int err)
+{
+	return (pthread_mutex_init(mutex, NULL) \
+	&& (program__mx_destroy(program, err), 1));
+}
+
+inline int	program__mx_lock(t_program *program, \
+	pthread_mutex_t *mutex, int err)
+{
+	return (pthread_mutex_lock(mutex) \
+	&& (program__mx_destroy(program, err), 1));
+}
