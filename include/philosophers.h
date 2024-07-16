@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 08:41:23 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/15 14:19:00 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/16 15:00:15 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ struct s_philosopher
 	t_program					*program;
 };
 
+int					parser(int argc, char *argv[]);
+
 // INIT SECTION
 int					philo__init(t_program *program, int i);
 int					philos__init(t_program *program);
@@ -116,7 +118,6 @@ int					is_int(char *s, int type);
 
 int					ft_strlen(const char *s);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
-int					ph_parser(int argc, char *argv[]);
 int					check_philo_end(t_program *program, t_philo *philo, int err);
 int					action(unsigned long time, int index, char *str);
 int					action__now(t_program *program, t_philo *philo, char *str, int err);
