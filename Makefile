@@ -6,7 +6,7 @@
 #    By: capapes <capapes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/02 07:27:27 by carolinapap       #+#    #+#              #
-#    Updated: 2024/07/12 17:50:51 by capapes          ###   ########.fr        #
+#    Updated: 2024/07/15 14:24:54 by capapes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,16 +26,18 @@ SRC = 	main.c \
 		debug.c \
 		fn_aux.c \
 		parser.c \
-		program__end.c \
+		is_int.c \
 		philo__init.c \
 		philo__forks.c \
 		philo_exit.c \
 		philo__rutine.c \
 		philos__init.c \
 		philos__utils.c \
+		philo__utils2.c \
 		program__init.c \
 		program__run.c \
 		program__utils.c \
+		program__end.c \
 		mx__meals.c \
 
 OBJ = $(SRC:%.c=$(BUILD_DIR)/%.o)

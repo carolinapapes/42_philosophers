@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_integer.c                                       :+:      :+:    :+:   */
+/*   is_int.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 11:16:32 by capapes           #+#    #+#             */
-/*   Updated: 2024/07/13 11:21:00 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/15 14:26:03 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ static char	*_get_non_zero_digit(char *s)
 	return (s);
 }
 
-int	ft_is_str_int(char *s, int type)
+int	is_int(char *s, int type)
 {
 	int		len;
 
 	if (!_isnbr(s))
 		return (0);
 	s = _get_non_zero_digit(s);
-	if (type == NON_ZERO && !_isempty(s))
+	if (type == NON_ZERO && _isempty(s))
 		return (0);
 	len = ft_strlen(s);
 	if (len != 10)

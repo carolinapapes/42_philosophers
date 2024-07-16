@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 08:41:23 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/12 17:43:49 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/15 14:19:00 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ int					mx__meals(t_program *program, t_philo *philo, \
 					long int time, int *k);
 int					philo__usleep(t_philo *philo, int time, int err);
 int					mx_lock(t_philo *philo, pthread_mutex_t *mutex, int err);
+int					is_int(char *s, int type);
 
 int					ft_strlen(const char *s);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
