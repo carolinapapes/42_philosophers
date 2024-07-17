@@ -6,12 +6,11 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 14:38:47 by capapes           #+#    #+#             */
-/*   Updated: 2024/07/16 16:14:05 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/17 19:11:59 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
 #include <stdio.h>
 #include <sys/time.h>
 #include <unistd.h>
@@ -20,7 +19,9 @@ int	program__start(t_program *program, int err)
 {
 	if (err)
 		program->philos_end = 1;
+	pthread_mutex_lock(&program->mx_write);
 	program->time_start = get_time();
+	pthread_mutex_unlock(&program->mx_write);
 	pthread_mutex_unlock(&program->mx_start);
 	return (program->time_start < 0);
 }

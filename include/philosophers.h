@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 08:41:23 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/17 17:01:14 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/17 19:10:24 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,9 @@
 # define CLEAN_FREE 3
 # define CLEAN_PHILOS 7
 # define CLEAN_FULL 15
-# define CLEAN_START 31
+# define CLEAN_START 32
 
 # define STR_INT_MAX "2147483647"
-
 
 // ERRORS
 # define ERR_MALLOC "Philosophers: malloc error\n"
