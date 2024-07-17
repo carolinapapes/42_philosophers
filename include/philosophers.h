@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 08:41:23 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/16 16:51:47 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/17 17:01:14 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_program
 	pthread_mutex_t		mx_start;
 	pthread_mutex_t		mx_write;
 	t_philo				*philos;
-	volatile int		philos_end;
+	int					philos_end;
 	int					philos_n;
 	long int			time_to_die;
 	long int			time_to_eat;
@@ -71,8 +71,8 @@ struct s_philosopher
 	pthread_t					id;
 	int							index;
 	int							err;
-	volatile int				meal_n;
-	volatile long int			meal_t;
+	int							meal_n;
+	long int					meal_t;
 	pthread_mutex_t				*mx_fork_l;
 	pthread_mutex_t				mx_fork_r;
 	pthread_mutex_t				mx_meal;
@@ -126,11 +126,10 @@ int					forks__get(t_philo *philo, t_program *program);
 int					forks__drop(t_philo *philo);
 
 // DEBUGGER
-// void				program__print(t_program *program);
-// void				program__print_end(int j, t_program *program, \t_philo *philo);
-// void				program__mx_print(t_program *program, \
-// 					void (*f)(t_program *program));
-// void				philo__print(t_philo *philo);
-// void				philo__mx_print(t_philo *philo, void (*f)(t_philo *philo));
+void				program__print(t_program *program);
+void				program__print_end(int j, t_program *program, t_philo *philo);
+void				program__mx_print(t_program *program, void (*f)(t_program *program));
+void				philo__print(t_philo *philo);
+void				philo__mx_print(t_philo *philo, void (*f)(t_philo *philo));
 
 #endif

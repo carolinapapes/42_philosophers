@@ -6,13 +6,14 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 20:46:44 by capapes           #+#    #+#             */
-/*   Updated: 2024/07/16 16:31:21 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/17 16:58:00 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include "philo.h"
 #include "philo_helpers.h"
+#include <unistd.h>
 
 inline int	forks__get(t_philo *philo, t_program *program)
 {
@@ -40,13 +41,13 @@ static int	_next(t_philo *philo, t_program *program)
 inline int	philo__meal(t_philo *philo, t_program *program)
 {
 	return ((\
-		philo__mx_lock(philo, &program->mx_write, PHILO_ERRR) || \
 		philo__mx_lock(philo, &philo->mx_meal, PHILO_ERRR) || \
 		check_philo_end(program, philo, PHILO_ERR_WRITE) || \
 		_next(philo, program) || \
+		philo__mx_lock(philo, &program->mx_write, PHILO_ERRR) || \
 		action(philo->meal_t * 0.001, philo->index, EAT) || \
-		philo__mx_unlock(philo, &philo->mx_meal, PHILO_ERR_MEAL) || \
 		philo__mx_unlock(philo, &program->mx_write, PHILO_ERR_WRITE) || \
+		philo__mx_unlock(philo, &philo->mx_meal, PHILO_ERR_MEAL) || \
 		philo__usleep(philo, program->time_to_eat, PHILO_ERRR)) \
 		&& exit_(philo, PHILO_ERR_FORKS));
 }

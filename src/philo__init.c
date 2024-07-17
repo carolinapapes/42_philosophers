@@ -36,5 +36,6 @@ int	philo__init(t_program *program, int i)
 	if (_init(&program->philos[i]))
 		return (program__exit(program, i, CLEAN_PHILOS, EXIT_FAILURE));
 	_fork__add_ptr(program, i);
+	//philo__print(&program->philos[i]);
 	return (0);
 }

@@ -1,0 +1,57 @@
+Error8
+Error8
+Error8
+Error8
+Error8
+Error8
+Error8
+Error8
+Error8
+Error8
+Error8
+Error8
+Error8
+
+
+ -------------- PHILO 1 
+philo->index: 1
+philo->meal_n: 0
+philo->meal_t: 0
+philo->mx_fork_l: (nil)
+philo->mx_fork_r: 0x7b4800000028
+philo->mx_meal: 0x7b4800000050
+philo->program: 0x7fff07f5ece0
+
+
+ -------------- PHILO 2 
+philo->index: 2
+philo->meal_n: 0
+philo->meal_t: 0
+philo->mx_fork_l: 0x7b4800000028
+philo->mx_fork_r: 0x7b48000000a8
+philo->mx_meal: 0x7b48000000d0
+philo->program: 0x7fff07f5ece0
+
+
+ -------------- PHILO 3 
+philo->index: 3
+philo->meal_n: 0
+philo->meal_t: 0
+philo->mx_fork_l: 0x7b48000000a8
+philo->mx_fork_r: 0x7b4800000128
+philo->mx_meal: 0x7b4800000150
+philo->program: 0x7fff07f5ece0
+0 2 takes fork
+0 2 takes fork
+0 2 is eating
+99 3 takes fork
+100 2 is sleeping
+100 1 takes fork
+100 3 takes fork
+100 3 is eating
+200 2 is thinking
+200 3 is sleeping
+200 1 takes fork
+200 1 is eating
+200 2 takes fork
+210 2 died
