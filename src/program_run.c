@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   program__run.c                                     :+:      :+:    :+:   */
+/*   program_run.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,7 +15,7 @@
 #include <sys/time.h>
 #include <unistd.h>
 
-int	program__start(t_program *program, int err)
+int	program_start(t_program *program, int err)
 {
 	if (err)
 		program->philos_end = 1;
@@ -26,7 +26,7 @@ int	program__start(t_program *program, int err)
 	return (program->time_start < 0);
 }
 
-int	program__run(t_program *program)
+int	program_run(t_program *program)
 {
 	int			j;
 	int			k;
@@ -38,7 +38,7 @@ int	program__run(t_program *program)
 		j = -1;
 		k = 0;
 		while (++j < program->philos_n)
-			if (program__status(program, &program->philos[j], time, &k))
+			if (program_status(program, &program->philos[j], time, &k))
 				return (1);
 	}
 	return (0);

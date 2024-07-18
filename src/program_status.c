@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   program__status.c                                  :+:      :+:    :+:   */
+/*   program_status.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 13:07:15 by capapes           #+#    #+#             */
-/*   Updated: 2024/07/17 19:37:31 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/18 17:12:32 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,24 @@ static inline int	_err(t_philo *philo)
 
 static int	_end(t_program *program, int *k, int j)
 {
-	int	should_unlock;
+	// int	should_unlock;
 
-	should_unlock = 1;
+	// should_unlock = 1;
 	if (program->philos_end)
 		return (0);
 	// if (pthread_mutex_lock(&program->mx_write))
-	// 	should_unlock = 0;
+		// should_unlock = 0;
+	pthread_mutex_lock(&program->mx_write);
 	program->philos_end = 1;
 	if (program->philos_n != *k)
 		printf("%ld %d died\n", (get_time() - program->time_start) / 1000, j);
+	pthread_mutex_unlock(&program->mx_write);
 	// if (should_unlock)
-	// 	pthread_mutex_unlock(&program->mx_write);
+		// pthread_mutex_unlock(&program->mx_write);
 	return (0);
 }
 
-int	program__status(t_program *program, t_philo *philo, \
+int	program_status(t_program *program, t_philo *philo, \
 				long int time, int *k)
 {
 	return ((\

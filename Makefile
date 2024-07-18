@@ -6,12 +6,12 @@
 #    By: capapes <capapes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/02 07:27:27 by carolinapap       #+#    #+#              #
-#    Updated: 2024/07/17 19:38:48 by capapes          ###   ########.fr        #
+#    Updated: 2024/07/18 19:47:49 by capapes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 DEBUGFLAGS = -fsanitize=thread
-CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=thread #-fsanitize=address  -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=thread #-fsanitize=address  -fsanitize=thread
 DEFLAGS = -MMD -MP 
 INCLUDE = -I./include
 
@@ -23,22 +23,21 @@ BUILD_DIR = ./build
 
 SRC = 	main.c \
 		action.c\
-		debug.c \
 		fn_aux.c \
 		parser.c \
-		parser__is_int.c \
-		philo__init.c \
-		philo__forks.c \
-		philo__exit.c \
-		philo__rutine.c \
-		philos__init.c \
-		philos__utils.c \
-		philo__utils2.c \
-		program__init.c \
-		program__run.c \
-		program__status.c \
-		program__utils.c \
-		program__end.c \
+		parser_is_int.c \
+		philo_init.c \
+		philo_forks.c \
+		philo_exit.c \
+		philo_rutine.c \
+		philos_init.c \
+		philos_utils.c \
+		philo_utils2.c \
+		program_init.c \
+		program_run.c \
+		program_status.c \
+		program_utils.c \
+		program_end.c \
 
 OBJ = $(SRC:%.c=$(BUILD_DIR)/%.o)
 DEP = $(OBJ:%.o=%.d)

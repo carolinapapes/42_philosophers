@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_int.c                                           :+:      :+:    :+:   */
+/*   parser_is_int.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 11:16:32 by capapes           #+#    #+#             */
-/*   Updated: 2024/07/15 14:26:03 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/18 17:18:13 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include "utils.h"
 
-static inline int	_isempty(char *s)
+static inline int	isempty(char *s)
 {
 	return (!*s);
 }
 
-static inline int	_isdigit(int c)
+static inline int	isdigit(int c)
 {
 	return (c >= '0' && c <= '9');
 }
 
-static int	_isnbr(char *s)
+static int	isnbr(char *s)
 {
-	while (_isdigit(*s))
+	while (isdigit(*s))
 		++s;
-	if (!_isempty(s))
+	if (!isempty(s))
 		return (0);
 	return (1);
 }
 
-static char	*_get_non_zero_digit(char *s)
+static char	*get_non_zero_digit(char *s)
 {
 	while (*s && *s == '0')
 		++s;
@@ -43,10 +43,10 @@ int	is_int(char *s, int type)
 {
 	int		len;
 
-	if (!_isnbr(s))
+	if (!isnbr(s))
 		return (0);
-	s = _get_non_zero_digit(s);
-	if (type == NON_ZERO && _isempty(s))
+	s = get_non_zero_digit(s);
+	if (type == NON_ZERO && isempty(s))
 		return (0);
 	len = ft_strlen(s);
 	if (len != 10)

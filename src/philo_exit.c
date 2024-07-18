@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_exit.c                                       :+:      :+:    :+:   */
+/*   philo_exit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 23:58:54 by capapes           #+#    #+#             */
-/*   Updated: 2024/07/13 11:26:35 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/18 16:32:47 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,19 @@ inline int	check_philo_end(t_program *program, t_philo *philo, int err)
 {
 	return (program->philos_end \
 		&& (*(&(philo->err)) = 1) == 1 \
-		&& exit_(philo, err));
+		&& philo_exit(philo, err));
 }
 
-int	exit_(t_philo *philo, int err)
+int	philo_exit(t_philo *philo, int err)
 {
+	printf("philo_exit\n");
 	_set_error(philo);
-	err & PHILO_ERR_FORK_R && pthread_mutex_unlock(&philo->mx_fork_r);
-	err & PHILO_ERR_FORK_L && pthread_mutex_unlock(philo->mx_fork_l);
+	err & PHILO_ERR_FORK_RIGHT && pthread_mutex_unlock(&philo->mx_fork_r);
+	err & PHILO_ERR_FORK_LEFT && pthread_mutex_unlock(philo->mx_fork_l);
 	err & PHILO_ERR_MEAL && pthread_mutex_unlock(&philo->mx_meal);
 	err & PHILO_ERR_WRITE && pthread_mutex_unlock(&philo->program->mx_write);
 	err & PHILO_ERR_START && pthread_mutex_unlock(&philo->program->mx_start);
 	err & PHILO_ERR_MEAL_INIT && pthread_mutex_destroy(&philo->mx_meal);
-	err & PHILO_ERR_FORK_R_INIT && pthread_mutex_destroy(&philo->mx_fork_r);
+	err & PHILO_ERR_FORK_RIGHT_INIT && pthread_mutex_destroy(&philo->mx_fork_r);
 	return (1);
 }

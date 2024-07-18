@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philos__utils.c                                    :+:      :+:    :+:   */
+/*   philos_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,27 +15,22 @@
 #include "philo_helpers.h"
 #include <unistd.h>
 
-inline int	philo__mx_lock(t_philo *philo, pthread_mutex_t *mutex, int err)
+inline int	philo_mx_lock(t_philo *philo, pthread_mutex_t *mutex, int err)
 {
-	return (pthread_mutex_lock(mutex) && exit_(philo, err));
+	return (pthread_mutex_lock(mutex) && philo_exit(philo, err));
 }
 
-inline int	philo__mx_unlock(t_philo *philo, pthread_mutex_t *mutex, int err)
+inline int	philo_mx_unlock(t_philo *philo, pthread_mutex_t *mutex, int err)
 {
-	return (pthread_mutex_unlock(mutex) && exit_(philo, err));
+	return (pthread_mutex_unlock(mutex) && philo_exit(philo, err));
 }
 
-inline int	philo__mx_init(t_philo *philo, pthread_mutex_t *mutex, int err)
+inline int	philo_mx_init(t_philo *philo, pthread_mutex_t *mutex, int err)
 {
-	return (pthread_mutex_init(mutex, NULL) && exit_(philo, err));
+	return (pthread_mutex_init(mutex, NULL) && philo_exit(philo, err));
 }
 
-inline int	philo__mx_destroy(t_philo *philo, pthread_mutex_t *mutex, int err)
+inline int	philo_usleep(t_philo *philo, int time, int err)
 {
-	return (pthread_mutex_destroy(mutex) && exit_(philo, err));
-}
-
-inline int	philo__usleep(t_philo *philo, int time, int err)
-{
-	return (philo->err || (usleep(time) && exit_(philo, err)));
+	return (philo->err || (usleep(time) && philo_exit(philo, err)));
 }

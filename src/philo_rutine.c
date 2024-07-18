@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo__rutine.c                                    :+:      :+:    :+:   */
+/*   philo_rutine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -17,36 +17,36 @@
 static inline void	_start(t_program *program, t_philo *philo)
 {
 	((pthread_mutex_lock(&program->mx_start) || \
-	philo__mx_lock(philo, &program->mx_write, PHILO_ERRR) || \
+	philo_mx_lock(philo, &program->mx_write, PHILO_ERRR) || \
 	program->philos_end | \
-	philo__mx_unlock(philo, &program->mx_write, PHILO_ERRR) | \
+	philo_mx_unlock(philo, &program->mx_write, PHILO_ERRR) | \
 	pthread_mutex_unlock(&program->mx_start)) || \
 	(philo->index & 1 \
-	&& philo__usleep(philo, program->time_to_eat - 900, PHILO_ERRR))) \
-	&& exit_(philo, PHILO_ERRR);
+	&& philo_usleep(philo, program->time_to_eat - 900, PHILO_ERRR))) \
+	&& philo_exit(philo, PHILO_ERRR);
 }
 
 static inline int	_sleep(t_program *program, t_philo *philo)
 {
 	return (\
-		action__now(program, philo, SLEEP, PHILO_ERRR) || \
-		philo__usleep(philo, program->time_to_sleep, PHILO_ERRR));
+		action_now(program, philo, SLEEP, PHILO_ERRR) || \
+		philo_usleep(philo, program->time_to_sleep, PHILO_ERRR));
 }
 
 static inline int	_think(t_program *program, t_philo *philo)
 {
-	return (action__now(program, philo, "is thinking", PHILO_ERRR));
+	return (action_now(program, philo, "is thinking", PHILO_ERRR));
 }
 
 static inline int	_eat(t_program *program, t_philo *philo)
 {
 	return (\
-		forks__get(philo, program) || \
-		philo__meal(philo, program) || \
-		forks__drop(philo));
+		forks_get(philo, program) || \
+		philo_meal(philo, program) || \
+		forks_drop(philo));
 }
 
-void	philo__rutine(t_philo *philo)
+void	philo_rutine(t_philo *philo)
 {
 	t_program	*program;
 

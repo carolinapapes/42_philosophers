@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo__utils2.c                                    :+:      :+:    :+:   */
+/*   philo_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,7 +13,7 @@
 #include "philosophers.h"
 #include <unistd.h>
 
-int	philos__iter(t_program *program, int n, int (*f)(t_program *, int))
+int	philos_iter(t_program *program, int n, int (*f)(t_program *, int))
 {
 	int	i;
 	int	status;

@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 08:41:23 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/17 19:10:24 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/18 19:51:25 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define MX_PHILO 18
 # define MX_FULL 31
 
-// CLEAN = cleanup identifiers - see program__exit
+// CLEAN = cleanup identifiers - see program_exit
 # define CLEAN_PROGRAM_MX 1
 # define CLEAN_FREE 3
 # define CLEAN_PHILOS 7
@@ -58,6 +58,7 @@ typedef struct s_program
 	pthread_mutex_t		mx_write;
 	t_philo				*philos;
 	int					philos_end;
+	int					rutine;
 	int					philos_n;
 	long int			time_to_die;
 	long int			time_to_eat;
@@ -81,34 +82,34 @@ struct s_philosopher
 int					parser(int argc, char *argv[]);
 
 // INIT SECTION
-int					philo__init(t_program *program, int i);
-int					philo__meal(t_philo *philo, t_program *program);
-void				philo__rutine(t_philo *philo);
-int					philo__usleep(t_philo *philo, int time, int err);
-int					philo__mx_lock(t_philo *philo, \
+int					philo_init(t_program *program, int i);
+int					philo_meal(t_philo *philo, t_program *program);
+void				philo_rutine(t_philo *philo);
+int					philo_usleep(t_philo *philo, int time, int err);
+int					philo_mx_lock(t_philo *philo, \
 						pthread_mutex_t *mutex, int err);
 
-int					philos__init(t_program *program);
-int					philos__th_join(t_program *program, int i);
-int					philos__mx_destroy(t_program *program, int i);
+int					philos_init(t_program *program);
+int					philos_th_join(t_program *program, int i);
+int					philos_mx_destroy(t_program *program, int i);
 
 // UTILS SECTION
 long int			get_time(void);
 int					ft_puterr(const char *s);
 
 // PROGRAM SECTION
-int					program__init(char **argv, t_program *program);
-int					program__exit(t_program *program, int n, int i, int status);
-int					program__run(t_program *program);
-int					program__start(t_program *program, int err);
-int					program__status(t_program *program, t_philo *philo, \
+int					program_init(char **argv, t_program *program);
+int					program_exit(t_program *program, int n, int i, int status);
+int					program_run(t_program *program);
+int					program_start(t_program *program, int err);
+int					program_status(t_program *program, t_philo *philo, \
 						long int time, int *k);
 
 // PROGRAM SYSTEM UTILS
-int					program__mx_destroy(t_program *program, int i);
-int					program__mx_init(t_program *program, \
+int					program_mx_destroy(t_program *program, int i);
+int					program_mx_init(t_program *program, \
 						pthread_mutex_t *mutex, int err);
-int					program__mx_lock(t_program *program, \
+int					program_mx_lock(t_program *program, \
 						pthread_mutex_t *mutex, int err);
 
 int					is_int(char *s, int type);
@@ -118,17 +119,10 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					check_philo_end(t_program *program, \
 						t_philo *philo, int err);
 int					action(unsigned long time, int index, char *str);
-int					action__now(t_program *program, \
+int					action_now(t_program *program, \
 						t_philo *philo, char *str, int err);
-void				philo__actions(t_program *program, t_philo *philo);
-int					forks__get(t_philo *philo, t_program *program);
-int					forks__drop(t_philo *philo);
-
-// DEBUGGER
-void				program__print(t_program *program);
-void				program__print_end(int j, t_program *program, t_philo *philo);
-void				program__mx_print(t_program *program, void (*f)(t_program *program));
-void				philo__print(t_philo *philo);
-void				philo__mx_print(t_philo *philo, void (*f)(t_philo *philo));
+void				philo_actions(t_program *program, t_philo *philo);
+int					forks_get(t_philo *philo, t_program *program);
+int					forks_drop(t_philo *philo);
 
 #endif
