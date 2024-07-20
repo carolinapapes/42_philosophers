@@ -5,6 +5,8 @@
         "random": "c",
         "philosophers.h": "c",
         "pthread.h": "c",
-        "philo_helpers.h": "c"
+        "philo_helpers.h": "c",
+        "time.h": "c",
+        "utils.h": "c"
     }
 }

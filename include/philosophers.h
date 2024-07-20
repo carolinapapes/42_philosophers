@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 08:41:23 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/20 14:25:34 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/20 15:56:32 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ struct s_philosopher
 	t_program					*program;
 };
 
+int					put_err(char *str);
 int					parser(int argc, char *argv[]);
 
 // INIT SECTION
@@ -114,7 +115,7 @@ int					program_mx_init(t_program *program, \
 int					program_mx_lock(t_program *program, \
 						pthread_mutex_t *mutex, int err);
 
-int					is_int(char *s, int type);
+int					is_int(char **s);
 
 int					ft_strlen(const char *s);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -123,8 +124,8 @@ int					check_philo_end(t_program *program, \
 int					action(unsigned long time, int index, char *str);
 int					action_now(t_program *program, \
 						t_philo *philo, char *str, int err);
-void				philo_actions(t_program *program, t_philo *philo);
 int					forks_get(t_philo *philo, t_program *program);
 int					forks_drop(t_philo *philo);
+int					philo_check_death(t_program *program, t_philo *philo);
 
 #endif

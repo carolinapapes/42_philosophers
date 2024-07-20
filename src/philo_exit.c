@@ -35,7 +35,6 @@ inline int	check_philo_end(t_program *program, t_philo *philo, int err)
 
 int	philo_exit(t_philo *philo, int err)
 {
-	printf("philo_exit\n");
 	_set_error(philo);
 	err & PHILO_ERR_FORK_RIGHT && pthread_mutex_unlock(&philo->mx_fork_r);
 	err & PHILO_ERR_FORK_LEFT && pthread_mutex_unlock(philo->mx_fork_l);

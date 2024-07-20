@@ -6,12 +6,12 @@
 #    By: capapes <capapes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/02 07:27:27 by carolinapap       #+#    #+#              #
-#    Updated: 2024/07/18 19:47:49 by capapes          ###   ########.fr        #
+#    Updated: 2024/07/20 15:06:43 by capapes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 DEBUGFLAGS = -fsanitize=thread
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=thread #-fsanitize=address  -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=thread #-fsanitize=address  -fsanitize=thread
 DEFLAGS = -MMD -MP 
 INCLUDE = -I./include
 

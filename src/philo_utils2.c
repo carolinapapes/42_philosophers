@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include "philo.h"
+#include "philo_helpers.h"
 #include <unistd.h>
 
 int	philos_iter(t_program *program, int n, int (*f)(t_program *, int))
@@ -25,4 +27,12 @@ int	philos_iter(t_program *program, int n, int (*f)(t_program *, int))
 	while (++i < n && !status)
 		status = f(program, i);
 	return (status);
+}
+
+inline int	philo_check_death(t_program *program, t_philo *philo)
+{
+	return (\
+		philo_mx_lock(philo, &program->mx_write, PHILO_ERRR) || \
+		program->philos_end | \
+		philo_mx_unlock(philo, &program->mx_write, PHILO_ERRR));
 }

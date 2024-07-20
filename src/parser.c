@@ -6,32 +6,32 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 15:56:37 by capapes           #+#    #+#             */
-/*   Updated: 2024/07/19 00:21:02 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/20 16:01:48 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include "utils.h"
 
-static inline int	err(char *str)
+inline int	put_err(char *str)
 {
 	return (ft_puterr(str), 1);
 }
 
 int	type(int argc, char *argv[])
 {
-	while (argc > 1 && is_int(argv[--argc], NON_ZERO))
+	while (argc > 1 && !is_int(&argv[--argc]))
 		;
 	return (\
 		argc > 1 \
-		&& err(ERR_ARGS_INT));
+		&& put_err(ERR_ARGS_INT));
 }
 
 static inline int	quantity(int argc)
 {
 	return (\
 		argc < 5 | argc > 6 \
-		&& err(ERR_ARGS_QTY));
+		&& put_err(ERR_ARGS_QTY));
 }
 
 int	parser(int argc, char *argv[])

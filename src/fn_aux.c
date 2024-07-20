@@ -6,13 +6,12 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:11:43 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/20 14:25:44 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/20 15:58:42 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
-#include <sys/time.h>
 
 int	atoi_parser(const char *str)
 {
@@ -37,15 +36,6 @@ int	ft_strlen(const char *s)
 int	ft_puterr(const char *s)
 {
 	return ((write(2, s, ft_strlen(s)) == -1));
-}
-
-long int	get_time(void)
-{
-	struct timeval	time;
-
-	if (gettimeofday(&time, NULL))
-		return (-1);
-	return (time.tv_sec * 1000000 + time.tv_usec);
 }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)

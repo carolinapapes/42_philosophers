@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 21:23:11 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/18 17:20:42 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/20 15:25:44 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 #include <stdio.h>
 #include "philo_helpers.h"
 #include <unistd.h>
+#include <sys/time.h>
+
+long int	get_time(void)
+{
+	struct timeval	time;
+
+	if (gettimeofday(&time, NULL))
+		return (-1);
+	return (time.tv_sec * 1000000 + time.tv_usec);
+}
 
 inline int	action(unsigned long time, int index, char *str)
 {
