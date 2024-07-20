@@ -6,30 +6,37 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 15:56:37 by capapes           #+#    #+#             */
-/*   Updated: 2024/07/16 14:59:51 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/19 00:21:02 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include "utils.h"
 
-int	_are_str_int(int argc, char *argv[])
+static inline int	err(char *str)
 {
-	int	i;
-	int	isvalid;
+	return (ft_puterr(str), 1);
+}
 
-	i = 0;
-	isvalid = 1;
-	while (isvalid && ++i < argc)
-		isvalid = is_int(argv[i], NON_ZERO);
-	return (isvalid);
+int	type(int argc, char *argv[])
+{
+	while (argc > 1 && is_int(argv[--argc], NON_ZERO))
+		;
+	return (\
+		argc > 1 \
+		&& err(ERR_ARGS_INT));
+}
+
+static inline int	quantity(int argc)
+{
+	return (\
+		argc < 5 | argc > 6 \
+		&& err(ERR_ARGS_QTY));
 }
 
 int	parser(int argc, char *argv[])
 {
-	return (((\
-		argc < 5 || argc > 6) \
-		&& printf("Error: invalid number of arguments\n")) || \
-		(!_are_str_int(argc, argv) \
-		&& printf("Error: invalid argument. Must be non-zero interger.\n")));
+	return (\
+		quantity(argc) || \
+		type(argc, argv));
 }

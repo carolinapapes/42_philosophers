@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:11:43 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/16 16:23:51 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/18 22:13:19 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_strlen(const char *s)
 
 int	ft_puterr(const char *s)
 {
-	return ((write(2, s, ft_strlen(s) == -1)));
+	return ((write(2, s, ft_strlen(s)) == -1));
 }
 
 long int	get_time(void)

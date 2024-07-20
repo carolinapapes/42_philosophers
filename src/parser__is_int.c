@@ -1,55 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_int.c                                           :+:      :+:    :+:   */
+/*   parser__is_int.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 11:16:32 by capapes           #+#    #+#             */
-/*   Updated: 2024/07/15 14:26:03 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/19 11:26:21 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include "utils.h"
 
-static inline int	_isempty(char *s)
+static int	is_nbr(char *s)
 {
+	while (*s >= '0' && *s <= '9')
+		s++;
 	return (!*s);
 }
 
-static inline int	_isdigit(int c)
+static int	str_other_than(char **s, char c)
 {
-	return (c >= '0' && c <= '9');
+	while (**s == c)
+		++(*s);
+	printf("str_not_chr: %d\n", !(**s));
+	return (**s);
 }
 
-static int	_isnbr(char *s)
+static int	get_non_zero(char **s, int non_zero)
 {
-	while (_isdigit(*s))
-		++s;
-	if (!_isempty(s))
-		return (0);
-	return (1);
+	int	i;
+
+	i = str_other_than(s, '0');
+	if (non_zero && i)
+		return (1);
+	return (i);
 }
 
-static char	*_get_non_zero_digit(char *s)
-{
-	while (*s && *s == '0')
-		++s;
-	return (s);
-}
-
-int	is_int(char *s, int type)
+static int	is_int_range(char *s)
 {
 	int		len;
 
-	if (!_isnbr(s))
-		return (0);
-	s = _get_non_zero_digit(s);
-	if (type == NON_ZERO && _isempty(s))
-		return (0);
 	len = ft_strlen(s);
+	printf("is_int_range: %d\n", len);
 	if (len != 10)
 		return (len < 10);
 	return (ft_strncmp(STR_INT_MAX, s, len) >= 0);
+}
+
+int	is_int(char *s, int is_zero)
+{
+	return (\
+		is_nbr(s) && \
+		get_non_zero(&s, is_zero) && \
+		is_int_range(s));
 }

@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 08:41:23 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/17 19:10:24 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/18 22:39:21 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@
 # define STR_INT_MAX "2147483647"
 
 // ERRORS
+# define ERR_ARGS_QTY "Philosophers: wrong number of arguments\n"
+# define ERR_ARGS_INT "Philosophers: wrong argument type\n"
 # define ERR_MALLOC "Philosophers: malloc error\n"
 # define ERR_ARGS "Philosophers: wrong arguments\n"
 # define ERR_MUTEX "Philosophers: mutex error\n"
