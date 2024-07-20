@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   program__utils.c                                	:+:      :+:    :+:   */
+/*   program_utils.c                                	:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "philosophers.h"
 
-int	program__mx_destroy(t_program *program, int i)
+int	program_mx_destroy(t_program *program, int i)
 {
 	i & MX_START && pthread_mutex_destroy(&program->mx_start);
 	i & MX_END && pthread_mutex_destroy(&program->mx_end);
@@ -20,16 +20,16 @@ int	program__mx_destroy(t_program *program, int i)
 	return (0);
 }
 
-inline int	program__mx_init(t_program *program, \
+inline int	program_mx_init(t_program *program, \
 	pthread_mutex_t *mutex, int err)
 {
 	return (pthread_mutex_init(mutex, NULL) \
-	&& (program__mx_destroy(program, err), 1));
+	&& (program_mx_destroy(program, err), 1));
 }
 
-inline int	program__mx_lock(t_program *program, \
+inline int	program_mx_lock(t_program *program, \
 	pthread_mutex_t *mutex, int err)
 {
 	return (pthread_mutex_lock(mutex) \
-	&& (program__mx_destroy(program, err), 1));
+	&& (program_mx_destroy(program, err), 1));
 }

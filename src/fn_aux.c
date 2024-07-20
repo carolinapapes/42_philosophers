@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:11:43 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/18 22:13:19 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/20 14:25:44 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include <sys/time.h>
 
-int	atoi__parser(const char *str)
+int	atoi_parser(const char *str)
 {
 	int	r;
 

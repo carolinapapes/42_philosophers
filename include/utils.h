@@ -6,16 +6,16 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 09:24:57 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/16 16:25:01 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/18 17:14:13 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
-#define NON_ZERO 1
+# define NON_ZERO 1
 
-int			atoi__parser(const char *str);
+int			atoi_parser(const char *str);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif

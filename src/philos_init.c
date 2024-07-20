@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philos__init.c                                     :+:      :+:    :+:   */
+/*   philos_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -22,24 +22,24 @@ static int	_allocate(t_program *program)
 {
 	program->philos = malloc(sizeof(t_philo) * program->philos_n);
 	if (!program->philos)
-		return (program__exit(program, 0, CLEAN_PROGRAM_MX, EXIT_FAILURE));
+		return (program_exit(program, 0, CLEAN_PROGRAM_MX, EXIT_FAILURE));
 	memset(program->philos, 0, sizeof(t_philo) * program->philos_n);
 	return (0);
 }
 
-static int	_philo__th_create(t_program *program, int i)
+static int	_philo_th_create(t_program *program, int i)
 {
 	if (pthread_create(&program->philos[i].id, NULL, \
-		(void *)philo__rutine, &program->philos[i]))
-		return (program__exit(program, i, CLEAN_START, EXIT_FAILURE));
+		(void *)philo_rutine, &program->philos[i]))
+		return (program_exit(program, i, CLEAN_START, EXIT_FAILURE));
 	return (0);
 }
 
-int	philos__init(t_program *program)
+int	philos_init(t_program *program)
 {
 	return (\
 	(_allocate(program) && (ft_puterr(ERR_MALLOC), 1)) || \
-	(philos__iter(program, 0, philo__init) && ft_puterr(ERR_MUTEX)) || \
-	(philos__iter(program, 0, _philo__th_create) && ft_puterr(ERR_THREAD)) \
+	(philos_iter(program, 0, philo_init) && ft_puterr(ERR_MUTEX)) || \
+	(philos_iter(program, 0, _philo_th_create) && ft_puterr(ERR_THREAD)) \
 	);
 }
