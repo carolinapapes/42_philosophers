@@ -19,14 +19,11 @@ static inline int	dead(t_philo *philo, long int time)
 	return (philo->meal_t < get_time() - time);
 }
 
-static inline int	done(t_philo *philo, t_program *program, int *k)
+static int	done(t_philo *philo, t_program *program, int *k)
 {
-	return (philo->meal_n == program->meals_n && ++(*k) == program->philos_n);
-}
-
-static inline int	err(t_philo *philo)
-{
-	return (philo->err);
+	return (program->meals_n != -1
+		&& philo->meal_n >= program->meals_n
+		&& ++(*k) >= program->philos_n);
 }
 
 static int	end(t_program *program, int *k, int j)
@@ -39,12 +36,19 @@ static int	end(t_program *program, int *k, int j)
 	return (0);
 }
 
+static inline int	get_status(t_program *program, t_philo *philo, \
+				long int time, int *k)
+{
+	return (
+		(philo->err || dead(philo, time) || done(philo, program, k))
+		&& end(program, k, philo->index));
+}
+
 int	program_status(t_program *program, t_philo *philo, \
 				long int time, int *k)
 {
-	return ((\
-		pthread_mutex_lock(&program->mx_write) || \
-		((dead(philo, time) || done(philo, program, k) || err(philo)) \
-		&& end(program, k, philo->index))) | \
-		pthread_mutex_unlock(&program->mx_write));
+	return (
+		pthread_mutex_lock(&program->mx_write)
+		|| get_status(program, philo, time, k)
+		| pthread_mutex_unlock(&program->mx_write));
 }

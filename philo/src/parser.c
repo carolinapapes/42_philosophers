@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 15:56:37 by capapes           #+#    #+#             */
-/*   Updated: 2024/07/20 16:01:48 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/20 20:54:02 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,10 @@ inline int	put_err(char *str)
 
 int	type(int argc, char *argv[])
 {
-	while (argc > 1 && !is_int(&argv[--argc]))
-		;
-	return (\
-		argc > 1 \
-		&& put_err(ERR_ARGS_INT));
+	while (argc > 1)
+		if (is_not_int(&argv[--argc]))
+			return (put_err(ERR_ARGS_INT));
+	return (0);
 }
 
 static inline int	quantity(int argc)

@@ -24,12 +24,12 @@ inline int	program_mx_init(t_program *program, \
 	pthread_mutex_t *mutex, int err)
 {
 	return (pthread_mutex_init(mutex, NULL) \
-	&& (program_mx_destroy(program, err), 1));
+	&& (program_mx_destroy(program, err), put_err(ERR_MUTEX), 1));
 }
 
 inline int	program_mx_lock(t_program *program, \
 	pthread_mutex_t *mutex, int err)
 {
 	return (pthread_mutex_lock(mutex) \
-	&& (program_mx_destroy(program, err), 1));
+	&& (program_mx_destroy(program, err), put_err(ERR_MUTEX), 1));
 }

@@ -16,9 +16,7 @@
 
 static int	init(t_philo *philo)
 {
-	return (\
-		philo_mx_init(philo, &philo->mx_meal, PHILO_ERRR) || \
-		philo_mx_init(philo, &philo->mx_fork_r, PHILO_ERR_MEAL_INIT));
+	return (philo_mx_init(philo, &philo->mx_fork_r, PHILO_ERRR));
 }
 
 static void	fork_add_l(t_program *program, int i)

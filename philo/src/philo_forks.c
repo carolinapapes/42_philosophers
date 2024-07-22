@@ -17,16 +17,18 @@
 
 static inline int	check_dead(t_philo *philo, t_program *program)
 {
-	while (&philo->mx_fork_r == philo->mx_fork_l)
+	int		i;
+
+	i = 0;
+	while (&philo->mx_fork_r == philo->mx_fork_l && !philo->err)
 	{
 		usleep(1);
 		philo_mx_lock(philo, &program->mx_write, PHILO_ERR_FORK_LEFT);
 		if (program->philos_end)
-		{
-			philo_exit(philo, PHILO_ERR_FORK_LEFT);
-			return (1);
-		}
+			i = 1;
 		philo_mx_unlock(philo, &program->mx_write, PHILO_ERR_FORK_LEFT);
+		if (i)
+			return (philo_exit(philo, PHILO_ERR_FORK_LEFT));
 	}
 	return (0);
 }
@@ -34,29 +36,31 @@ static inline int	check_dead(t_philo *philo, t_program *program)
 inline int	forks_get(t_philo *philo, t_program *program)
 {
 	if (philo->program->rutine && philo->index & 1)
-		return (\
-			philo_mx_lock(philo, philo->mx_fork_l, PHILO_ERRR) || \
-			action_now(program, philo, "takes fork", PHILO_ERR_FORK_LEFT) || \
-			check_dead(philo, program) || \
-			philo_mx_lock(philo, &philo->mx_fork_r, PHILO_ERR_FORK_LEFT) || \
-			action_now(program, philo, "takes fork", PHILO_ERR_FORKS) \
+		return (
+			philo_mx_lock(philo, philo->mx_fork_l, PHILO_ERRR)
+			|| action_now(program, philo, "takes fork", PHILO_ERR_FORK_LEFT)
+			|| check_dead(philo, program)
+			|| philo_mx_lock(philo, &philo->mx_fork_r, PHILO_ERR_FORK_LEFT)
+			|| action_now(program, philo, "takes fork", PHILO_ERR_FORKS_L)
 		);
-	return (\
-		philo_mx_lock(philo, &philo->mx_fork_r, PHILO_ERRR) || \
-		action_now(program, philo, "takes fork", PHILO_ERR_FORK_RIGHT) || \
-		check_dead(philo, program) || \
-		philo_mx_lock(philo, philo->mx_fork_l, PHILO_ERR_FORK_RIGHT) || \
-		action_now(program, philo, "takes fork", PHILO_ERR_FORKS) \
+	return (
+		philo_mx_lock(philo, &philo->mx_fork_r, PHILO_ERRR)
+		|| action_now(program, philo, "takes fork", PHILO_ERR_FORK_RIGHT)
+		|| check_dead(philo, program)
+		|| philo_mx_lock(philo, philo->mx_fork_l, PHILO_ERR_FORK_RIGHT)
+		|| action_now(program, philo, "takes fork", PHILO_ERR_FORKS_R)
 	);
 }
 
 inline int	forks_drop(t_philo *philo)
 {
 	if (philo->program->rutine && philo->index & 1)
-		return (philo_mx_unlock(philo, philo->mx_fork_l, PHILO_ERRR) | \
-				philo_mx_unlock(philo, &philo->mx_fork_r, PHILO_ERRR));
-	return (philo_mx_unlock(philo, &philo->mx_fork_r, PHILO_ERRR) | \
-			philo_mx_unlock(philo, philo->mx_fork_l, PHILO_ERRR));
+		return (
+			philo_mx_unlock(philo, philo->mx_fork_l, PHILO_ERRR)
+			| philo_mx_unlock(philo, &philo->mx_fork_r, PHILO_ERRR));
+	return (
+		philo_mx_unlock(philo, &philo->mx_fork_r, PHILO_ERRR)
+		| philo_mx_unlock(philo, philo->mx_fork_l, PHILO_ERRR));
 }
 
 static int	next(t_philo *philo, t_program *program)
@@ -68,12 +72,12 @@ static int	next(t_philo *philo, t_program *program)
 
 inline int	philo_meal(t_philo *philo, t_program *program)
 {
-	return ((\
-		philo_mx_lock(philo, &program->mx_write, PHILO_ERR_MEAL) || \
-		check_philo_end(program, philo, PHILO_ERR_WRITE) || \
-		next(philo, program) || \
-		action(philo->meal_t * 0.001, philo->index, EAT) || \
-		philo_mx_unlock(philo, &program->mx_write, PHILO_ERR_WRITE) || \
-		philo_usleep(philo, program->time_to_eat, PHILO_ERRR)) \
-		&& philo_exit(philo, PHILO_ERR_FORKS));
+	return (
+		philo_mx_lock(philo, &program->mx_write, PHILO_ERRR)
+		|| check_philo_end(program, philo, PHILO_ERR_WRITE)
+		|| next(philo, program)
+		|| action(philo->meal_t * 0.001, philo->index, EAT)
+		|| philo_mx_unlock(philo, &program->mx_write, PHILO_ERR_WRITE)
+		|| philo_usleep(philo, program->time_to_eat, PHILO_ERRR));
 }
+

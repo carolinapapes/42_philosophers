@@ -6,17 +6,17 @@
 #    By: capapes <capapes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/02 07:27:27 by carolinapap       #+#    #+#              #
-#    Updated: 2024/07/20 15:06:43 by capapes          ###   ########.fr        #
+#    Updated: 2024/07/22 18:04:01 by capapes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 DEBUGFLAGS = -fsanitize=thread
-CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=thread #-fsanitize=address  -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=thread 
 DEFLAGS = -MMD -MP 
 INCLUDE = -I./include
 
 PREQ = Makefile
-NAME = philosophers
+NAME = philo
 
 SRC_DIR = ./src
 BUILD_DIR = ./build
@@ -30,9 +30,9 @@ SRC = 	main.c \
 		philo_forks.c \
 		philo_exit.c \
 		philo_rutine.c \
+		philo_sysfn.c \
+		philo_utils.c \
 		philos_init.c \
-		philos_utils.c \
-		philo_utils2.c \
 		program_init.c \
 		program_run.c \
 		program_status.c \

@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 08:41:23 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/20 15:56:32 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/22 19:17:11 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 # define MX_WRITE 4
 # define MX_PROGRAM 7
 # define MX_FORK 8
-# define MX_MEAL 10
 # define MX_PHILO 18
 # define MX_FULL 31
 
@@ -38,6 +37,7 @@
 # define CLEAN_PHILOS 7
 # define CLEAN_FULL 15
 # define CLEAN_START 32
+# define CLEAN_START_PHILOS 33
 
 # define STR_INT_MAX "2147483647"
 
@@ -77,7 +77,6 @@ struct s_philosopher
 	long int					meal_t;
 	pthread_mutex_t				*mx_fork_l;
 	pthread_mutex_t				mx_fork_r;
-	pthread_mutex_t				mx_meal;
 	t_program					*program;
 };
 
@@ -115,7 +114,7 @@ int					program_mx_init(t_program *program, \
 int					program_mx_lock(t_program *program, \
 						pthread_mutex_t *mutex, int err);
 
-int					is_int(char **s);
+int					is_not_int(char **s);
 
 int					ft_strlen(const char *s);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);

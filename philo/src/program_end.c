@@ -23,7 +23,6 @@ int	philos_mx_destroy(t_program *program, int n)
 	while (++i < n)
 	{
 		philo = program->philos[i];
-		pthread_mutex_destroy(&philo.mx_meal);
 		pthread_mutex_destroy(&philo.mx_fork_r);
 	}
 	return (0);
@@ -44,7 +43,6 @@ int	philos_free(t_program *program)
 
 int	program_exit(t_program *program, int thphilos_n, int i, int status)
 {
-	(void)i;
 	if (thphilos_n == 0)
 		thphilos_n = program->philos_n;
 	i & CLEAN_START && program_start(program, ERR_INIT_FAIL);
