@@ -34,12 +34,10 @@ inline int	check_philo_end(t_program *program, t_philo *philo)
 
 int	philo_exit(t_philo *philo, int err)
 {
-	err & PHILO_ERR_FORK_LEFT_FIRST && pthread_mutex_unlock(philo->mx_fork_l);
-	err & PHILO_ERR_FORK_RIGHT && pthread_mutex_unlock(&philo->mx_fork_r);
-	err & PHILO_ERR_FORK_LEFT && pthread_mutex_unlock(philo->mx_fork_l);
 	err & PHILO_ERR_WRITE && pthread_mutex_unlock(&philo->program->mx_write);
-	err & PHILO_ERR_START && pthread_mutex_unlock(&philo->program->mx_start);
-	err & PHILO_ERR_FORK_RIGHT_INIT && pthread_mutex_destroy(&philo->mx_fork_r);
+	err & PHILO_ERR_FIRST && pthread_mutex_unlock(philo->fork_first);
+	err & PHILO_ERR_FORKS_UN && pthread_mutex_unlock(philo->fork_first);
+	err & PHILO_ERR_FORKS_UN && pthread_mutex_unlock(philo->fork_second);
 	return (1);
 }
 
