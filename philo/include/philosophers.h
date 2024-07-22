@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 08:41:23 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/22 19:17:11 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/22 21:01:46 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int					is_not_int(char **s);
 int					ft_strlen(const char *s);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					check_philo_end(t_program *program, \
-						t_philo *philo, int err);
+						t_philo *philo);
 int					action(unsigned long time, int index, char *str);
 int					action_now(t_program *program, \
 						t_philo *philo, char *str, int err);

@@ -28,7 +28,7 @@ static inline int	check_dead(t_philo *philo, t_program *program)
 			i = 1;
 		philo_mx_unlock(philo, &program->mx_write, PHILO_ERR_FORK_LEFT);
 		if (i)
-			return (philo_exit(philo, PHILO_ERR_FORK_LEFT));
+			return (philo_exit_print(philo, PHILO_ERR_FORK_LEFT));
 	}
 	return (0);
 }
@@ -70,14 +70,19 @@ static int	next(t_philo *philo, t_program *program)
 	return (philo->meal_t < 0);
 }
 
+static inline int take_meal(t_program *program, t_philo *philo)
+{
+	return (
+		check_philo_end(program, philo)
+		|| next(philo, program)
+		|| action(philo->meal_t * 0.001, philo->index, EAT));
+}
+
 inline int	philo_meal(t_philo *philo, t_program *program)
 {
 	return (
 		philo_mx_lock(philo, &program->mx_write, PHILO_ERRR)
-		|| check_philo_end(program, philo, PHILO_ERR_WRITE)
-		|| next(philo, program)
-		|| action(philo->meal_t * 0.001, philo->index, EAT)
-		|| philo_mx_unlock(philo, &program->mx_write, PHILO_ERR_WRITE)
+		|| take_meal(program, philo) | philo_mx_unlock(philo, &program->mx_write, PHILO_ERR_WRITE)
 		|| philo_usleep(philo, program->time_to_eat, PHILO_ERRR));
 }
 
