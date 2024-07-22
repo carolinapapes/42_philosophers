@@ -1,35 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/02 07:53:35 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/02 22:25:30 by capapes          ###   ########.fr       */
+/*   Created: 2024/07/11 15:56:37 by capapes           #+#    #+#             */
+/*   Updated: 2024/07/20 20:54:02 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-#include <stdio.h>
+#include "utils.h"
 
-static int	init(t_program *program, char **argv)
+inline int	put_err(char *str)
 {
-	if (program__init(argv, program))
-		return (1);
-	if (philos__init(program))
-		return (1);
+	return (ft_puterr(str), 1);
+}
+
+int	type(int argc, char *argv[])
+{
+	while (argc > 1)
+		if (is_not_int(&argv[--argc]))
+			return (put_err(ERR_ARGS_INT));
 	return (0);
 }
 
-int	main(int argc, char **argv)
+static inline int	quantity(int argc)
 {
-	t_program	program;
+	return (\
+		argc < 5 | argc > 6 \
+		&& put_err(ERR_ARGS_QTY));
+}
 
-	printf("argc: %d\n", argc);
-	if (init(&program, argv))
-		return (1);
-	program__mx_print(&program, program__print);
-	program__exit(&program, 0, CLEAN_FULL);
-	return (0);
+int	parser(int argc, char *argv[])
+{
+	return (\
+		quantity(argc) || \
+		type(argc, argv));
 }

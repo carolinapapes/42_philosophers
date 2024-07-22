@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo__init.c                                    :+:      :+:    :+:   */
+/*   philo_init.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,17 +11,15 @@
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include "philo.h"
+#include "philo_helpers.h"
 
-static int	mx_init(t_philo *philo)
+static int	init(t_philo *philo)
 {
-	if (pthread_mutex_init(&philo->mx_meal, NULL))
-		return (1);
-	if (pthread_mutex_init(&philo->mx_fork_r, NULL))
-		return (philo__mx_destroy(philo, MX_MEAL), 1);
-	return (0);
+	return (philo_mx_init(philo, &philo->mx_fork_r, PHILO_ERRR));
 }
 
-static void	fork__add_ptr(t_program *program, int i)
+static void	fork_add_l(t_program *program, int i)
 {
 	if (i == program->philos_n - 1)
 		program->philos[0].mx_fork_l = &program->philos[i].mx_fork_r;
@@ -29,12 +27,12 @@ static void	fork__add_ptr(t_program *program, int i)
 		program->philos[i].mx_fork_l = &program->philos[i - 1].mx_fork_r;
 }
 
-int	philo__init(t_program *program, int i)
+int	philo_init(t_program *program, int i)
 {
 	program->philos[i].program = program;
 	program->philos[i].index = i + 1;
-	if (mx_init(&program->philos[i]))
-		return (program__exit(program, i, CLEAN_PHILOS), 1);
-	fork__add_ptr(program, i);
+	if (init(&program->philos[i]))
+		return (program_exit(program, i, CLEAN_PHILOS, EXIT_FAILURE));
+	fork_add_l(program, i);
 	return (0);
 }

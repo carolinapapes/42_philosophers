@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   program__utils.c                                	:+:      :+:    :+:   */
+/*   program_utils.c                                	:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,12 +12,24 @@
 
 #include "philosophers.h"
 
-void	program__mx_destroy(t_program *program, int i)
+int	program_mx_destroy(t_program *program, int i)
 {
-	if (MX_START & i)
-		pthread_mutex_destroy(&program->mx_start);
-	if (MX_END & i)
-		pthread_mutex_destroy(&program->mx_end);
-	if (MX_WRITE & i)
-		pthread_mutex_destroy(&program->mx_write);
+	i & MX_START && pthread_mutex_destroy(&program->mx_start);
+	i & MX_END && pthread_mutex_destroy(&program->mx_end);
+	i & MX_WRITE && pthread_mutex_destroy(&program->mx_write);
+	return (0);
+}
+
+inline int	program_mx_init(t_program *program, \
+	pthread_mutex_t *mutex, int err)
+{
+	return (pthread_mutex_init(mutex, NULL) \
+	&& (program_mx_destroy(program, err), put_err(ERR_MUTEX), 1));
+}
+
+inline int	program_mx_lock(t_program *program, \
+	pthread_mutex_t *mutex, int err)
+{
+	return (pthread_mutex_lock(mutex) \
+	&& (program_mx_destroy(program, err), put_err(ERR_MUTEX), 1));
 }
