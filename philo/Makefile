@@ -6,12 +6,12 @@
 #    By: capapes <capapes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/02 07:27:27 by carolinapap       #+#    #+#              #
-#    Updated: 2024/07/22 21:59:45 by capapes          ###   ########.fr        #
+#    Updated: 2024/07/23 01:38:22 by capapes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 DEBUGFLAGS = -fsanitize=thread
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -O2 -S
 DEFLAGS = -MMD -MP 
 INCLUDE = -I./include
 
@@ -28,8 +28,10 @@ SRC = 	main.c \
 		parser_is_int.c \
 		philo_init.c \
 		philo_forks.c \
+		philo_meal.c \
 		philo_exit.c \
 		philo_rutine.c \
+		philo_rutine_set.c \
 		philo_sysfn.c \
 		philo_utils.c \
 		philos_init.c \

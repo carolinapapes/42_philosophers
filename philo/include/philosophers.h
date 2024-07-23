@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 08:41:23 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/22 22:59:21 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/23 00:50:46 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define CLEAN_FULL 15
 # define CLEAN_START 32
 # define CLEAN_START_PHILOS 33
+# define CLEAN_INIT_FAIL 1
 
 # define STR_INT_MAX "2147483647"
 
@@ -48,8 +49,11 @@
 # define ERR_ARGS "Philosophers: wrong arguments\n"
 # define ERR_MUTEX "Philosophers: mutex error\n"
 # define ERR_THREAD "Philosophers: thread error\n"
-# define ERR_INIT_FAIL 1
 // TYPES
+
+# define LEFTY 0
+# define RIGHTY 1
+
 typedef struct s_philosopher	t_philo;
 
 typedef struct s_program
@@ -77,8 +81,8 @@ struct s_philosopher
 	long int					meal_t;
 	pthread_mutex_t				*mx_fork_l;
 	pthread_mutex_t				mx_fork_r;
-	pthread_mutex_t 			*fork_first;
-	pthread_mutex_t 			*fork_second;
+	pthread_mutex_t				*fork_first;
+	pthread_mutex_t				*fork_second;
 	t_program					*program;
 };
 
@@ -123,10 +127,10 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					check_philo_end(t_program *program, \
 						t_philo *philo);
 int					action(unsigned long time, int index, char *str);
-int					action_now(t_program *program, \
+int					print_now(t_program *program, \
 						t_philo *philo, char *str, int err);
 int					forks_get(t_philo *philo, t_program *program);
 int					forks_drop(t_philo *philo);
-int					philo_check_death(t_program *program, t_philo *philo);
+void				set_start(t_program *program, t_philo *philo);
 
 #endif

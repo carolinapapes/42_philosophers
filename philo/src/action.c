@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 21:23:11 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/22 21:10:44 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/23 01:13:24 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,25 @@ long int	get_time(void)
 	return (time.tv_sec * 1000000 + time.tv_usec);
 }
 
+static inline long int	get_now(t_program *program)
+{
+	return ((get_time() - program->time_start) * 0.001);
+}
+
 inline int	action(unsigned long time, int index, char *str)
 {
-	return (printf("%ld %d  %s\n", time, index, str) == -1);
+	return (time < 0 || printf("%ld %d  %s\n", time, index, str) == -1);
 }
 
 static int	now(t_program *program, t_philo *philo, char *str)
 {
-	long	time;
-
-	time = (get_time() - program->time_start) * 0.001;
 	return ((
-			program->philos_end || philo->err || time < 0
-			|| action(time, philo->index, str)));
+			program->philos_end
+			|| philo->err
+			|| action(get_now(program), philo->index, str)));
 }
 
-inline int	action_now(t_program *program, t_philo *philo, char *str, int err)
+inline int	print_now(t_program *program, t_philo *philo, char *str, int err)
 {
 	return ((
 			philo_mx_lock(philo, &program->mx_write, err)

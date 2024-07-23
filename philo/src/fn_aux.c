@@ -6,7 +6,7 @@
 /*   By: capapes <capapes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:11:43 by carolinapap       #+#    #+#             */
-/*   Updated: 2024/07/20 15:58:42 by capapes          ###   ########.fr       */
+/*   Updated: 2024/07/23 01:16:04 by capapes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	ft_strlen(const char *s)
 {
 	int	i;
 
-	i = 0;
-	while (s[i])
-		i++;
+	i = -1;
+	while (s[++i])
+		;
 	return (i);
 }
 

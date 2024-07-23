@@ -29,7 +29,7 @@ void	set_error(t_philo *philo)
 inline int	check_philo_end(t_program *program, t_philo *philo)
 {
 	return (program->philos_end
-		&& (*(&(philo->err)) = 1));
+		&& (philo->err = 1));
 }
 
 int	philo_exit(t_philo *philo, int err)

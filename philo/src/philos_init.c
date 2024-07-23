@@ -27,7 +27,7 @@ static int	allocate(t_program *program)
 
 static int	philo_th_create(t_program *program, int i)
 {
-	if (pthread_create(&program->philos[i].id, NULL, \
+	if (pthread_create(&program->philos[i].id, NULL,
 		(void *)philo_rutine, &program->philos[i]))
 		return (program_exit(program, i, CLEAN_START_PHILOS, EXIT_FAILURE));
 	return (0);
@@ -35,8 +35,8 @@ static int	philo_th_create(t_program *program, int i)
 
 int	philos_init(t_program *program)
 {
-	return (\
-	(allocate(program) && (ft_puterr(ERR_MALLOC), 1)) || \
-	(philos_iter(program, 0, philo_init) && put_err(ERR_MUTEX)) || \
-	(philos_iter(program, 0, philo_th_create) && put_err(ERR_THREAD)));
+	return (
+		(allocate(program) && (ft_puterr(ERR_MALLOC), 1))
+		|| (philos_iter(program, 0, philo_init) && put_err(ERR_MUTEX))
+		|| (philos_iter(program, 0, philo_th_create) && put_err(ERR_THREAD)));
 }

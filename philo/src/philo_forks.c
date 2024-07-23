@@ -37,10 +37,10 @@ inline int	forks_get(t_philo *philo, t_program *program)
 {
 	return (
 		philo_mx_lock(philo, philo->fork_first, PHILO_ERRR)
-		|| action_now(program, philo, FORK, PHILO_ERR_FIRST)
+		|| print_now(program, philo, FORK, PHILO_ERR_FIRST)
 		|| check_dead(philo, program)
 		|| philo_mx_lock(philo, philo->fork_second, PHILO_ERR_FIRST)
-		|| action_now(program, philo, FORK, PHILO_ERR_FORKS_UN)
+		|| print_now(program, philo, FORK, PHILO_ERR_FORKS_UN)
 	);
 }
 
@@ -51,39 +51,21 @@ inline int	forks_drop(t_philo *philo)
 		| philo_mx_unlock(philo, philo->fork_second, PHILO_ERRR));
 }
 
-static int	next(t_philo *philo, t_program *program)
-{
-	philo->meal_n++;
-	philo->meal_t = get_time() - program->time_start;
-	return (philo->meal_t < 0);
-}
-
-inline int	philo_meal(t_philo *philo, t_program *program)
-{
-	return (
-		philo_mx_lock(philo, &program->mx_write, PHILO_ERRR)
-		|| (check_philo_end(program, philo)
-			|| next(philo, program)
-			|| action(philo->meal_t * 0.001, philo->index, EAT))
-		| philo_mx_unlock(philo, &program->mx_write, PHILO_ERR_WRITE)
-		|| philo_usleep(philo, program->time_to_eat, PHILO_ERRR));
-}
-
 // inline int	forks_get(t_philo *philo, t_program *program)
 // {
 // 	return (
 // 		(case_odd(philo, program)
 // 			&& philo_mx_lock(philo, philo->mx_fork_l, PHILO_ERRR)
-// 			|| action_now(program, philo, "takes fork", PHILO_ERR_FORK_LEFT)
+// 			|| print_now(program, philo, "takes fork", PHILO_ERR_FORK_LEFT)
 // 			|| check_dead(philo, program)
 // 			|| philo_mx_lock(philo, &philo->mx_fork_r, PHILO_ERR_FORK_LEFT)
-// 			|| action_now(program, philo, "takes fork", PHILO_ERR_FORKS_L)
+// 			|| print_now(program, philo, "takes fork", PHILO_ERR_FORKS_L)
 // 		)
 // 		|| philo_mx_lock(philo, &philo->mx_fork_r, PHILO_ERRR)
-// 		|| action_now(program, philo, "takes fork", PHILO_ERR_FORK_RIGHT)
+// 		|| print_now(program, philo, "takes fork", PHILO_ERR_FORK_RIGHT)
 // 		|| check_dead(philo, program)
 // 		|| philo_mx_lock(philo, philo->mx_fork_l, PHILO_ERR_FORK_RIGHT)
-// 		|| action_now(program, philo, "takes fork", PHILO_ERR_FORKS_R)
+// 		|| print_now(program, philo, "takes fork", PHILO_ERR_FORKS_R)
 // 	);
 // }
 
